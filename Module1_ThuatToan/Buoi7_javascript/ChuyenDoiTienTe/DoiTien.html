@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng Dụng Chuyển Đổi Tiền Tệ</title>
+</head>
+<body>
+
+<h2>Ứng Dụng Chuyển Đổi Tiền Tệ</h2>
+
+<label for="amount">Số tiền:</label>
+<input type="number" id="amount" placeholder="Nhập số tiền">
+
+<label for="fromCurrency">Từ đồng tiền:</label>
+<select id="fromCurrency">
+    <option value="VND">Việt Nam Đồng (VND)</option>
+    <!-- Thêm các lựa chọn đồng tiền khác ở đây -->
+</select>
+
+<label for="toCurrency">Sang đồng tiền:</label>
+<select id="toCurrency">
+    <option value="USD">Đô-la Mỹ (USD)</option>
+    <!-- Thêm các lựa chọn đồng tiền khác ở đây -->
+</select>
+
+<button onclick="convertCurrency()">Chuyển Đổi</button>
+
+<p>Kết quả: <span id="result"></span></p>
+
+<script src="ChuyenDoi.js"></script>
+
+</body>
+</html>
