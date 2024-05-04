@@ -42,5 +42,5 @@ function bai4()
 
 // Bài 4
 function countWords(str) {
-    return str.split(' ').length;
+    return str.split(/\s+/).length;
 }
