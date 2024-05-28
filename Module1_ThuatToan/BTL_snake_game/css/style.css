@@ -3,8 +3,9 @@
     padding: 0;
 }
 body {
+    background-image: url("../images/snake/jungle_bg.jpg");
     background-color: #516012;
-    color: #fff;
+    color: #020202;
     overflow: hidden;
 }
 
@@ -39,6 +40,7 @@ body {
 .info ul li:not(:last-child) {
     margin-right: 20px;
 }
+
 #changeMode {
     font-size: 18px;
     font-weight: 700;
@@ -47,8 +49,8 @@ body {
     outline: none;
     width: 150px;
     height: 32px;
-    background-color: #fff;
-    color: #1a4636;
+    background-color: #000000;
+    color: #85debc;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,11 +59,11 @@ body {
 }
 #changeMode:hover {
     background-color: #00ffa6;
-    color: #fff;
+    color: #000000;
 }
 
 canvas#canvas {
-    background-color: #ffffff;
+    background-color: #ded7a0;
 }
 
 @media (max-width: 650px) {

@@ -14,11 +14,11 @@ canvas.width = 720;
 canvas.height = 480;
 
 // Cấu hình game
-const config = { // General setting
+const config = {
     sizeCell: 24, //  Kích thước của một ô trong trò chơi.
     sizeFood: 24, // Kích thước của thức ăn.
     step: 0, // Số bước di chuyển
-    stepMax: 10, // Số bước di chuyển tối đa
+    stepMax: 10
 }
 
 class Snake {
@@ -103,44 +103,63 @@ class Bomb {
 
 let bomb = new Bomb(config);
 
-function randomPosBomb() { // random bomb position
+function randomPosBomb() { // random bomb
     let chance = randomInt(1, 5);
-    if ( chance === 3 ) {
+    if ( chance === 3 ) { // 20% hien bom
         bomb.x = randomInt(0, canvas.width / config.sizeCell) * config.sizeCell;
         bomb.y = randomInt(0, canvas.height / config.sizeCell) * config.sizeCell;
         drawBomb();
     }
-    else {
+    else { // xoa bom
         bomb.x = -config.sizeCell;
         bomb.y = -config.sizeCell;
         drawBomb();
     }
 }
 
-function drawBomb() { // функция добовления бомбы
+function drawBomb() { // ve bomb
     ctx.drawImage(bomb.bombImg, bomb.x, bomb.y, config.sizeFood, config.sizeFood);
 }
 
-function drawScore() {
+function drawScore() { // ve diem so
     scoreBlock.innerHTML = scoreCount;
 }
 
 function bestScore() {
-    if ( !localStorage.getItem('best score') ) {
-        localStorage.setItem('best score', 0);
+
+    // xoa best score
+    // localStorage.removeItem('best score easy');
+    // localStorage.removeItem('best score hard');
+
+    // Initialize best scores if they don't exist
+    if (!localStorage.getItem('best score easy')) {
+        localStorage.setItem('best score easy', 0);
     }
-    if ( scoreCount > localStorage.getItem('best score') ) {
-        localStorage.setItem('best score', scoreCount);
+    if (!localStorage.getItem('best score hard')) {
+        localStorage.setItem('best score hard', 0);
     }
-    bestScoreBlock.innerHTML = localStorage.getItem('best score');
+
+    // Update the best score for the current mode
+    if (diff === 'Easy' && scoreCount > localStorage.getItem('best score easy')) {
+        localStorage.setItem('best score easy', scoreCount);
+    } else if (diff === 'Hard' && scoreCount > localStorage.getItem('best score hard')) {
+        localStorage.setItem('best score hard', scoreCount);
+    }
+
+    // Display the best score for the current mode
+    if (diff === 'Easy') {
+        bestScoreBlock.innerHTML = localStorage.getItem('best score easy');
+    } else {
+        bestScoreBlock.innerHTML = localStorage.getItem('best score hard');
+    }
 }
 function score() {
     scoreCount++;
     bestScore();
     if ( scoreCount > 15 )
-        config.stepMax = 5;
-    else if ( scoreCount <= 15 )
         config.stepMax = 6;
+    else if ( scoreCount <= 15 )
+        config.stepMax = 7;
     drawScore();
 }
 
@@ -223,8 +242,8 @@ function drawSnake() {
                 randomPosBomb();
             }
         }
-
-        if ( diff === 'Hard' ) { // if snake has touched the bomd, reduce the length of the snake
+        // cham vao bom giam chieu dai
+        if ( diff === 'Hard' ) {
             if ( e.x === bomb.x && e.y === bomb.y ) {
                 if ( scoreCount >= 2 ) {
                     scoreCount = Math.ceil(scoreCount / 2);
@@ -244,7 +263,7 @@ function drawSnake() {
         // Checking if the snake has touched the tail
         for ( let i = index + 1; i < snake.body.length; i++ ) {
             if ( e.x === snake.body[i].x && e.y === snake.body[i].y ) {
-                restart();
+                endGame();
             }
         }
     });
@@ -290,19 +309,31 @@ function checkBorder() { // A function that checks for going beyond the border
 
 function withoutBorder() { // A function that checks if the snake is touched border
     if ( snake.x < 0 ) {
+        endGame();
         restart();
     } else if ( snake.x >= canvas.width ) {
+        endGame();
         restart();
     }
     if ( snake.y < 0 ) {
+        endGame();
         restart();
     } else if ( snake.y >= canvas.height ) {
+        endGame();
         restart();
     }
 }
 
+function endGame() {
+    bestScore();
+    swal("Game Over", "Điểm của bạn là: " + scoreCount)
+        .then(() => {
+            restart();
+        });
+}
+
 function restart() { // A function restart game
-    config.stepMax = 6;
+    config.stepMax = 7;
     scoreCount = 0;
     drawScore();
 
