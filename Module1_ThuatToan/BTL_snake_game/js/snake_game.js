@@ -277,7 +277,7 @@ function gameLoop() {
     if ( ++config.step < config.stepMax )
         return;
     config.step = 0;
-
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFood();
     drawSnake();
