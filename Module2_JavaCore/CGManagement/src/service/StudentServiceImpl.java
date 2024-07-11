@@ -3,6 +3,10 @@ import model.Student;
 import repository.IStudentRepo;
 import repository.StudentRepoImpl;
 
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class StudentServiceImpl implements IStudentService{
     private IStudentRepo studentRepo = new StudentRepoImpl();
 
@@ -48,5 +52,10 @@ public class StudentServiceImpl implements IStudentService{
     @Override
     public void edit() {
         studentRepo.edit();
+    }
+
+    @Override
+    public ArrayList<Student> getStudents() {
+        return studentRepo.getStudents();
     }
 }

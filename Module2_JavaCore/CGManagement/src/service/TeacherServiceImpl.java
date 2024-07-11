@@ -51,4 +51,9 @@ public class TeacherServiceImpl implements ITeacherService {
     public void editTeacher() {
         teacherRepo.edit();
     }
+
+    @Override
+    public void searchTeacher() {
+        teacherRepo.search();
+    }
 }

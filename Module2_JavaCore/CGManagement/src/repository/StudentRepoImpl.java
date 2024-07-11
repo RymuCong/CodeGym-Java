@@ -22,6 +22,8 @@ public class StudentRepoImpl implements IStudentRepo {
         return !students.isEmpty() ? students.get(students.size() - 1).getId() + 1 : 1;
     }
 
+
+
     @Override
     public void findAll() {
         for (Student student : students) {
@@ -86,6 +88,11 @@ public class StudentRepoImpl implements IStudentRepo {
             }
         }
         System.out.println("Không tìm thấy học viên có mã " + studentCode);
+    }
+
+    @Override
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
 }

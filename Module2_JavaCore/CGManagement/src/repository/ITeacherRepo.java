@@ -12,4 +12,6 @@ public interface ITeacherRepo {
     void delete();
 
     void edit();
+
+    void search();
 }

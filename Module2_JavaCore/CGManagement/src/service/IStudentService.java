@@ -1,6 +1,8 @@
 package service;
 import model.Student;
 
+import java.util.ArrayList;
+
 public interface IStudentService {
     void findAll();
 
@@ -11,4 +13,6 @@ public interface IStudentService {
     void delete();
 
     void edit();
+
+    ArrayList<Student> getStudents();
 }

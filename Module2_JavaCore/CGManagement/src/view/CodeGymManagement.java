@@ -46,6 +46,7 @@ public class CodeGymManagement {
                     2. Thêm học viên
                     3. Xóa học viên
                     4. Chỉnh sửa thông tin HV
+                    5. Xuất CSV
                     0. Quay lại trang chủ
                     Nhập lựa chọn :\s""");
             int opt = Integer.parseInt(sc.nextLine());
@@ -64,6 +65,9 @@ public class CodeGymManagement {
                 case 4:
                     studentController.editStudent();
                     break;
+                case 5:
+                    studentController.exportToCsv();
+                    break;
             }
         } while (true);
 
@@ -78,6 +82,7 @@ public class CodeGymManagement {
                     2. Thêm giảng viên
                     3. Xóa giảng viên
                     4. Chỉnh sửa thông tin GV
+                    5. Tìm kiếm giảng viên
                     0. Quay lại trang chủ
                     Nhập lựa chọn :\s""");
             int opt = Integer.parseInt(sc.nextLine());
@@ -96,6 +101,9 @@ public class CodeGymManagement {
                     break;
                 case 4:
                     teacherController.editTeacher();
+                    break;
+                case 5:
+                    teacherController.searchTeacher();
                     break;
             }
         } while (true);

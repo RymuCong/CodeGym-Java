@@ -91,4 +91,17 @@ public class TeacherRepoImpl implements ITeacherRepo{
         }
         System.out.println("Không tìm thấy giảng viên cần sửa!");
     }
+
+    @Override
+    public void search() {
+        System.out.println("Nhập mã giảng viên cần tìm: ");
+        String teacherCode = scanner.nextLine();
+        for (Teacher teacher : teachers) {
+            if (teacher.getCode().equals(teacherCode)) {
+                System.out.println(teacher);
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy giảng viên cần tìm!");
+    }
 }
