@@ -38,5 +38,17 @@ public class TeacherController {
     }
 
 
-
+    public void exportToCsv() {
+        try {
+            FileWriter fileWriter = new FileWriter("src/view/teachers.csv", false);
+            fileWriter.write("ID,Code,Name,Email\n");
+            List<Teacher> teachers = teacherService.getTeachers();
+            for (Teacher teacher : teachers) {
+                fileWriter.write(teacher.getId() + "," + teacher.getCode() + "," + teacher.getName() + "," + teacher.getEmail() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }

@@ -58,4 +58,9 @@ public class StudentServiceImpl implements IStudentService{
     public ArrayList<Student> getStudents() {
         return studentRepo.getStudents();
     }
+
+    @Override
+    public void importFromCsv() {
+        studentRepo.importFromCsv();
+    }
 }

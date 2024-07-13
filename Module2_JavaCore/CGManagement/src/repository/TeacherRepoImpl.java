@@ -5,6 +5,7 @@ import model.Teacher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static repository.StudentRepoImpl.generateId;
@@ -103,5 +104,10 @@ public class TeacherRepoImpl implements ITeacherRepo{
             }
         }
         System.out.println("Không tìm thấy giảng viên cần tìm!");
+    }
+
+    @Override
+    public List<Teacher> getTeachers() {
+        return teachers;
     }
 }

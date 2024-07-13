@@ -52,4 +52,8 @@ public class StudentController {
             System.err.println(e.getMessage());
         }
     }
+
+    public void importToCsv() {
+        studentService.importFromCsv();
+    }
 }

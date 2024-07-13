@@ -1,6 +1,10 @@
 package repository;
 
 import model.Student;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -93,6 +97,32 @@ public class StudentRepoImpl implements IStudentRepo {
     @Override
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    @Override
+    public void importFromCsv() {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/view/students.csv"))) {
+            students.clear();
+            String line;
+            // Skip the header line
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                String className = values[0];
+                int id = Integer.parseInt(values[1]);
+                String code = values[2];
+                String name = values[3];
+                LocalDate dob = LocalDate.parse(values[4], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String email = values[5];
+                Student student = new Student(id, code, name, dob, email, className);
+                students.add(student);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading CSV file: " + e.getMessage());
+            return;
+        }
+
+        System.out.println("Đã nhập file CSV thành công!");
     }
 
 }

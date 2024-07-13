@@ -4,6 +4,8 @@ import model.Teacher;
 import repository.ITeacherRepo;
 import repository.TeacherRepoImpl;
 
+import java.util.List;
+
 public class TeacherServiceImpl implements ITeacherService {
     private ITeacherRepo teacherRepo = new TeacherRepoImpl();
 
@@ -55,5 +57,10 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public void searchTeacher() {
         teacherRepo.search();
+    }
+
+    @Override
+    public List<Teacher> getTeachers() {
+        return teacherRepo.getTeachers();
     }
 }

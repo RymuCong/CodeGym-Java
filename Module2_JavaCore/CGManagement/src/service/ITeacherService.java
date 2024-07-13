@@ -2,6 +2,8 @@ package service;
 
 import model.Teacher;
 
+import java.util.List;
+
 public interface ITeacherService {
     void findAll();
 
@@ -14,4 +16,6 @@ public interface ITeacherService {
     void editTeacher();
 
     void searchTeacher();
+
+    List<Teacher> getTeachers();
 }

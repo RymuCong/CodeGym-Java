@@ -17,4 +17,6 @@ public interface IStudentRepo {
     void edit();
 
     ArrayList<Student> getStudents();
+
+    void importFromCsv();
 }

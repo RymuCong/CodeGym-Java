@@ -15,4 +15,6 @@ public interface IStudentService {
     void edit();
 
     ArrayList<Student> getStudents();
+
+    void importFromCsv();
 }

@@ -2,6 +2,8 @@ package repository;
 
 import model.Teacher;
 
+import java.util.List;
+
 public interface ITeacherRepo {
     void findAll();
 
@@ -14,4 +16,6 @@ public interface ITeacherRepo {
     void edit();
 
     void search();
+
+    List<Teacher> getTeachers();
 }
