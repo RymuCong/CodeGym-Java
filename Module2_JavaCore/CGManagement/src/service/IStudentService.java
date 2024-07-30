@@ -17,4 +17,6 @@ public interface IStudentService {
     ArrayList<Student> getStudents();
 
     void importFromCsv();
+
+    void exportToCsv();
 }

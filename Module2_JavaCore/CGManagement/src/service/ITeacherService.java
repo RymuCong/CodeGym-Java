@@ -18,4 +18,8 @@ public interface ITeacherService {
     void searchTeacher();
 
     List<Teacher> getTeachers();
+
+    void importFromCsv();
+
+    void exportToCsv();
 }

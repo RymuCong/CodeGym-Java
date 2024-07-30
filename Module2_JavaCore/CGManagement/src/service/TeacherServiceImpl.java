@@ -16,27 +16,7 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public Teacher addTeacher() {
-        Teacher newTeacher = teacherRepo.addTeacher();
-        String errorInput;
-        do {
-            errorInput = "";
-            System.out.println(newTeacher.toString());
-            if (!newTeacher.getName().matches("[a-zA-Z]+")) {
-                errorInput += "\n- Tên không hợp lệ!";
-            }
-            if (!newTeacher.getEmail().matches("^[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+$")) {
-                errorInput += "\n- Email không hợp lệ!";
-            }
-            if (newTeacher.getSalary() < 0) {
-                errorInput += "\n- Lương không hợp lệ!";
-            }
-            if (!errorInput.isEmpty()) {
-                System.out.println(errorInput);
-                System.out.println("=== Vui lòng nhập lại! ===");
-                newTeacher = teacherRepo.addTeacher();
-            }
-        } while (!errorInput.isEmpty());
-        return newTeacher;
+        return teacherRepo.addTeacher();
     }
 
     @Override
@@ -62,5 +42,15 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public List<Teacher> getTeachers() {
         return teacherRepo.getTeachers();
+    }
+
+    @Override
+    public void importFromCsv() {
+        teacherRepo.importFromCsv();
+    }
+
+    @Override
+    public void exportToCsv() {
+        teacherRepo.exportToCsv();
     }
 }

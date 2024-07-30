@@ -63,4 +63,9 @@ public class StudentServiceImpl implements IStudentService{
     public void importFromCsv() {
         studentRepo.importFromCsv();
     }
+
+    @Override
+    public void exportToCsv() {
+        studentRepo.exportToCsv();
+    }
 }

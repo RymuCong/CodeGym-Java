@@ -21,10 +21,6 @@ public class StudentController {
         studentService.save(addStudent);
     }
 
-    public void updateStudent() {
-
-    }
-
     public void deleteStudent() {
         studentService.delete();
     }
@@ -34,23 +30,7 @@ public class StudentController {
     }
 
     public void exportToCsv() {
-        try {
-            File directory = new File("./src/view/");
-            if (! directory.exists()){
-                boolean result = directory.mkdirs();
-                if (!result) {
-                    throw new IOException("Failed to create directory " + directory.getPath());
-                }
-            }
-            FileWriter fileWriter = new FileWriter(new File(directory, "students.csv"), false);
-            fileWriter.write("Class,ID,Code,Name,Birthday,Email\n");            List<Student> students = studentService.getStudents();
-            for(Student student : students){
-                fileWriter.write(student.getClassName() + "," + student.getId() + "," + student.getCode() + "," + student.getName() + "," + student.getBirthday() + "," + student.getEmail() + "\n");
-            }
-            fileWriter.close();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+        studentService.exportToCsv();
     }
 
     public void importToCsv() {

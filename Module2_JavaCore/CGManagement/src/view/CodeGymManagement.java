@@ -20,8 +20,18 @@ public class CodeGymManagement {
                     1. Quản lí học viên
                     2. Quản lí giảng viên
                     0. Thoát chương trình
-                    Nhập lựa chọn:\s""");
-            int choice = Integer.parseInt(sc.nextLine());
+                    \s""");
+            int choice = 0;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    System.out.print("Nhập lựa chọn: ");
+                    choice = Integer.parseInt(sc.nextLine());
+                    validInput = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Yêu cầu nhập một số hợp lệ!");
+                }
+            }
             switch (choice) {
                 case 0:
                     System.exit(0);
@@ -49,8 +59,18 @@ public class CodeGymManagement {
                     5. Xuất CSV
                     6. Đọc CSV
                     0. Quay lại trang chủ
-                    Nhập lựa chọn :\s""");
-            int opt = Integer.parseInt(sc.nextLine());
+                    \s""");
+            int opt = 0;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    System.out.print("Nhập lựa chọn: ");
+                    opt = Integer.parseInt(sc.nextLine());
+                    validInput = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Yêu cầu nhập một số hợp lệ!");
+                }
+            }
             switch (opt) {
                 case 0:
                     return;
@@ -90,9 +110,20 @@ public class CodeGymManagement {
                     4. Chỉnh sửa thông tin GV
                     5. Tìm kiếm giảng viên
                     6. Xuất CSV
+                    7. Đọc CSV
                     0. Quay lại trang chủ
-                    Nhập lựa chọn :\s""");
-            int opt = Integer.parseInt(sc.nextLine());
+                    \s""");
+            int opt = 0;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    System.out.print("Nhập lựa chọn: ");
+                    opt = Integer.parseInt(sc.nextLine());
+                    validInput = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Yêu cầu nhập một số hợp lệ!");
+                }
+            }
             switch (opt) {
                 case 0:
                     System.out.println("Quay lại trang chủ...");
@@ -114,6 +145,9 @@ public class CodeGymManagement {
                     break;
                 case 6:
                     teacherController.exportToCsv();
+                    break;
+                case 7:
+                    teacherController.importFromCsv();
                     break;
             }
         } while (true);
