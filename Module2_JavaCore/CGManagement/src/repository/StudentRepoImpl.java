@@ -42,7 +42,7 @@ public class StudentRepoImpl implements IStudentRepo {
 
     @Override
     public Student addStudent() {
-        System.out.println("Nhập mã học viên: ");
+        System.out.println("Nhập mã học viên (HV-0000): ");
         String studentCode = scanner.nextLine();
         studentCode = checkInput(studentCode, "^HV-[0-9]{3,4}$");
         System.out.println("Nhập tên học viên: ");
@@ -56,7 +56,7 @@ public class StudentRepoImpl implements IStudentRepo {
         System.out.println("Nhập email: ");
         String email = scanner.nextLine();
         email = checkInput(email, "^[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+$");
-        System.out.println("Nhập mã lớp: ");
+        System.out.println("Nhập mã lớp (CxxxxMx): ");
         String classCode = scanner.nextLine();
         classCode = checkInput(classCode, "^C[0-9]{4}[A-Z][0-9]$");
         return new Student(generateId(), studentCode, studentName, dob, email, classCode);
@@ -83,20 +83,26 @@ public class StudentRepoImpl implements IStudentRepo {
 
     @Override
     public void edit() {
-        System.out.println("Nhập mã học viên cần sửa: ");
+        System.out.println("Nhập mã học viên cần sửa (HV-xxxx): ");
         String studentCode = scanner.nextLine();
+        studentCode = checkInput(studentCode, "^HV-[0-9]{3,4}$");
         for (Student student : students) {
             if (student.getCode().equals(studentCode)) {
                 System.out.println("Nhập tên học viên: ");
                 String name = scanner.nextLine();
+                name = checkInput(name, "^[a-zA-Z\\s]+$");
                 System.out.println("Nhập ngày sinh (dd/MM/yyyy): ");
                 String pattern = "dd/MM/yyyy";
-                LocalDate dob = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern(pattern));
+                String dobStr = scanner.nextLine();
+                dobStr = checkInput(dobStr, "^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
+                LocalDate dob = LocalDate.parse(dobStr, DateTimeFormatter.ofPattern(pattern));
                 System.out.println("Nhập email: ");
                 String email = scanner.nextLine();
-                System.out.println("Nhập tên lớp: ");
-                String className = scanner.nextLine();
-                Student editedStudent = new Student(student.getId(), studentCode, name, dob, email, className);
+                email = checkInput(email, "^[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+$");
+                System.out.println("Nhập mã lớp (CxxxxMx): ");
+                String classCode = scanner.nextLine();
+                classCode = checkInput(classCode, "^C[0-9]{4}[A-Z][0-9]$");
+                Student editedStudent = new Student(student.getId(), studentCode, name, dob, email, classCode);
                 students.set(students.indexOf(student), editedStudent);
                 System.out.println("\nSửa thông tin học viên thành công!");
                 return;
