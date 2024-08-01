@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="02732773-17e4-4dec-8af5-7fc43180962f" name="Changes" comment="validate input edit function" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2iNJ4m4plhfy5nsrDX3pBa1ZdTQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CodeGymManagement.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "G:/Java/QuanLyPTGT",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02732773-17e4-4dec-8af5-7fc43180962f" name="Changes" comment="" />
+      <created>1719324913759</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1719324913759</updated>
+      <workItem from="1719324914756" duration="69000" />
+      <workItem from="1719384820278" duration="69000" />
+      <workItem from="1719458429021" duration="4655000" />
+      <workItem from="1719469283309" duration="3475000" />
+      <workItem from="1719474408489" duration="20000" />
+      <workItem from="1719667397887" duration="192000" />
+      <workItem from="1719910198781" duration="11000" />
+      <workItem from="1719924746131" duration="4543000" />
+      <workItem from="1720098974990" duration="63000" />
+      <workItem from="1720099671603" duration="709000" />
+      <workItem from="1720268921088" duration="2558000" />
+      <workItem from="1720490204488" duration="20000" />
+      <workItem from="1720698129345" duration="6177000" />
+      <workItem from="1720872182813" duration="4215000" />
+      <workItem from="1721124996076" duration="111000" />
+      <workItem from="1721308329830" duration="280000" />
+      <workItem from="1721718204382" duration="77000" />
+      <workItem from="1721722840731" duration="46000" />
+      <workItem from="1721961312187" duration="1235000" />
+      <workItem from="1721963272666" duration="4675000" />
+      <workItem from="1722344038877" duration="317000" />
+      <workItem from="1722345707867" duration="2088000" />
+      <workItem from="1722513145099" duration="7000" />
+      <workItem from="1722515199006" duration="7311000" />
+    </task>
+    <task id="LOCAL-00001" summary="crud console">
+      <option name="closed" value="true" />
+      <created>1719667466965</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719667466965</updated>
+    </task>
+    <task id="LOCAL-00002" summary="crud console">
+      <option name="closed" value="true" />
+      <created>1719667558415</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719667558415</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update write file">
+      <option name="closed" value="true" />
+      <created>1720702551466</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720702551466</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update i/o">
+      <option name="closed" value="true" />
+      <created>1720878549392</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720878549392</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update i/o">
+      <option name="closed" value="true" />
+      <created>1721125033894</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721125033894</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add interface crud, import csv">
+      <option name="closed" value="true" />
+      <created>1722344137915</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722344137915</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add interface crud, add csv file demo">
+      <option name="closed" value="true" />
+      <created>1722345788368</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722345788368</updated>
+    </task>
+    <task id="LOCAL-00008" summary="validate input edit function">
+      <option name="closed" value="true" />
+      <created>1722417060378</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722417060378</updated>
+    </task>
+    <task id="LOCAL-00009" summary="validate input edit function">
+      <option name="closed" value="true" />
+      <created>1722417113525</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722417113525</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="crud console" />
+    <MESSAGE value="update write file" />
+    <MESSAGE value="update i/o" />
+    <MESSAGE value="add interface crud, import csv" />
+    <MESSAGE value="add interface crud, add csv file demo" />
+    <MESSAGE value="validate input edit function" />
+    <option name="LAST_COMMIT_MESSAGE" value="validate input edit function" />
+  </component>
+</project>
