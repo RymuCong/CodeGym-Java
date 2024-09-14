@@ -44,7 +44,7 @@ public class TeacherRepoImpl implements ITeacherRepo{
 
     @Override
     public Teacher addTeacher() {
-        System.out.println("Nhập mã giảng viên: ");
+        System.out.println("Nhập mã giảng viên (GV-0000): ");
         String teacherCode = scanner.nextLine();
         teacherCode = checkInput(teacherCode, "^GV-[0-9]{3,4}$");
         System.out.println("Nhập tên giảng viên: ");
@@ -97,20 +97,39 @@ public class TeacherRepoImpl implements ITeacherRepo{
 
     @Override
     public void edit() {
-        System.out.println("Nhập mã giảng viên cần sửa: ");
+        System.out.println("Nhập mã giảng viên cần sửa (GV-xxxx): ");
         String teacherCode = scanner.nextLine();
+        teacherCode = checkInput(teacherCode, "^GV-[0-9]{3,4}$");
         for (Teacher teacher : teachers) {
             if (teacher.getCode().equals(teacherCode)) {
                 System.out.println("Nhập tên giảng viên: ");
-                teacher.setName(scanner.nextLine());
+                String techerName = scanner.nextLine();
+                techerName = checkInput(techerName, "^[a-zA-Z\\s]+$");
                 System.out.println("Nhập ngày sinh (dd/MM/yyyy): ");
                 String pattern = "dd/MM/yyyy";
-                teacher.setBirthday(LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern(pattern)));
+                String dobStr = scanner.nextLine();
+                dobStr = checkInput(dobStr, "^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
+                LocalDate dob = LocalDate.parse(dobStr, DateTimeFormatter.ofPattern(pattern));
                 System.out.println("Nhập email: ");
-                teacher.setEmail(scanner.nextLine());
+                String email = scanner.nextLine();
+                email = checkInput(email, "^[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+$");
                 System.out.println("Nhập lương: ");
-                teacher.setSalary(Integer.parseInt(scanner.nextLine()));
-                teachers.set(teachers.indexOf(teacher), teacher);
+                int salary = 0;
+                boolean validSalary = false;
+                while (!validSalary) {
+                    try {
+                        salary = Integer.parseInt(scanner.nextLine());
+                        if (salary >= 0) {
+                            validSalary = true;
+                        } else {
+                            System.out.println("Lương không hợp lệ! Vui lòng nhập lại: ");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Lương không hợp lệ! Vui lòng nhập lại: ");
+                    }
+                }
+                Teacher editedTeacher = new Teacher(teacher.getId(), teacherCode , techerName, dob, email, salary);
+                teachers.set(teachers.indexOf(teacher), editedTeacher);
                 System.out.println("\nSửa thành công thông tin giảng viên!");
                 return;
             }
