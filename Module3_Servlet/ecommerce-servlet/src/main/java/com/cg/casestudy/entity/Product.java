@@ -5,7 +5,7 @@ public class Product {
 	private int productId;
     private String productName;
     private String productDescription;
-    private float productPrice;
+    private int productPrice;
     private int productDiscount;
     private int productQuantity;
     private String productImages;
@@ -14,7 +14,7 @@ public class Product {
 	public Product() {
 	}
 	
-	public Product(int productId, String productName, String productDescription, float productPrice,
+	public Product(int productId, String productName, String productDescription, int productPrice,
 			int productDiscount, int productQuantity, String productImages, int categoryId) {
 		super();
 		this.productId = productId;
@@ -27,7 +27,7 @@ public class Product {
 		this.categoryId = categoryId;
 	}
 
-	public Product(String productName, String productDescription, float productPrice, int productDiscount,
+	public Product(String productName, String productDescription, int productPrice, int productDiscount,
 			int productQuantity, String productImages) {
 		super();
 		this.productName = productName;
@@ -38,7 +38,7 @@ public class Product {
 		this.productImages = productImages;
 	}
 
-	public Product(String productName, String productDescription, float productPrice, int productDiscount,
+	public Product(String productName, String productDescription, int productPrice, int productDiscount,
 			int productQuantity, String productImages, int categoryId) {
 		super();
 		this.productName = productName;
@@ -50,7 +50,7 @@ public class Product {
 		this.categoryId = categoryId;
 	}
 	
-	public Product(int productId, String productName, float productPrice, int productDiscount, int productQuantity) {
+	public Product(int productId, String productName, int productPrice, int productDiscount, int productQuantity) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -83,11 +83,11 @@ public class Product {
 		this.productDescription = productDescription;
 	}
 
-	public float getProductPrice() {
+	public int getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(float productPrice) {
+	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
 

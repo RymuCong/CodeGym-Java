@@ -1,7 +1,7 @@
-<%--<%@page import="com.cg.casestudy.service.WishlistDao"%>--%>
 <%@page import="com.cg.casestudy.service.ProductServiceImpl"%>
 <%@page import="com.cg.casestudy.entity.Product"%>
-<%@ page import="com.cg.casestudy.service.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
+<%@page import="com.cg.casestudy.utils.PriceFormatter"%>
 <%@page errorPage="error_exception.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -9,14 +9,14 @@
 <%
 int productId = Integer.parseInt(request.getParameter("pid"));
 ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvider.getConnection());
-Product product = (Product) ProductServiceImpl.getProductById(productId);
+Product product = ProductServiceImpl.getProductById(productId);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>View Product</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 <style type="text/css">
 .real-price {
 	font-size: 26px !important;
@@ -37,10 +37,10 @@ Product product = (Product) ProductServiceImpl.getProductById(productId);
 <body>
 
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<div class="container mt-5">
-			<%@include file="Components/alert_message.jsp"%>
+			<%@include file="components/alert_message.jsp"%>
 		<div class="row border border-3">
 			<div class="col-md-6">
 				<div class="container-fluid text-end my-3">
@@ -53,38 +53,36 @@ Product product = (Product) ProductServiceImpl.getProductById(productId);
 				<div class="container-fluid my-5">
 					<h4><%=product.getProductName()%></h4>
 					<span class="fs-5"><b>Description</b></span><br> <span><%=product.getProductDescription()%></span><br>
-					<span class="real-price"><%=product.getProductPriceAfterDiscount()%></span>&ensp;
-					<span class="product-price"><%=product.getProductPrice()%></span>&ensp;
-					<span class="product-discount"><%=product.getProductDiscount()%>&#37;off</span><br>
+					<span class="real-price"><%=PriceFormatter.formatPrice(product.getProductPriceAfterDiscount())%></span>&ensp;
+					<span class="product-price"><%=PriceFormatter.formatPrice(product.getProductPrice())%></span>&ensp;
+					<span class="product-discount"><%=product.getProductDiscount()%>&#37;</span><br>
 					<span class="fs-5"><b>Status : </b></span> <span id="availability">
 						<%
-						if (product.getProductQunatity() > 0) {
-							out.println("Available");
-						} else {
-							out.println("Currently Out of stock");
-						}
+							String availability = product.getProductQuantity() > 0 ? "Available" : "Out of stock";
 						%>
-					</span><br> <span class="fs-5"><b>Category : </b></span> <span><%=catDao.getCategoryName(product.getCategoryId())%></span>
+  						<%= availability %>
+					</span><br> <span class="fs-5"><b>Category: </b></span> <span><%=catDao.getCategoryNameById(product.getCategoryId())%></span>
 					<form method="post">
 						<div class="container-fluid text-center mt-3">
 							<%
 							if (user == null) {
 							%>
 							<button type="button" onclick="window.open('login.jsp', '_self')"
-								class="btn btn-primary text-white btn-lg">Add to Cart</button>
+								class="btn btn-primary text-white btn-lg">Add to cart</button>
 							&emsp;
 							<button type="button" onclick="window.open('login.jsp', '_self')"
-								class="btn btn-info text-white btn-lg">Buy Now</button>
+								class="btn btn-info text-white btn-lg">Buy now</button>
 							<%
 							} else {
 							%>
 							<button type="submit"
-								formaction="./AddToCartServlet?uid=<%=user.getId()%>&pid=<%=product.getProductId()%>"
-								class="btn btn-primary text-white btn-lg">Add to Cart</button>
+<%--								formaction="./AddToCartServlet?uid=<%=user.getId()%>&pid=<%=product.getProductId()%>"--%>
+									formaction="#"
+								class="btn btn-primary text-white btn-lg">Add to cart</button>
 							&emsp; <a
 								href="checkout.jsp" id="buy-btn"
 								class="btn btn-info text-white btn-lg" role="button"
-								aria-disabled="true">Buy Now</a> 
+								aria-disabled="true">Buy now</a>
 							<%
 							}
 							%>

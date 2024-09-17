@@ -20,7 +20,7 @@ if (activeUser == null) {
 <head>
 <meta charset="ISO-8859-1">
 <title>My Profile</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 <style>
 .cus-active {
 	background-color: #e6eefa !important;
@@ -38,7 +38,7 @@ if (activeUser == null) {
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<div class="container-fluid px-3 py-5">
 		<div class="row">
@@ -47,7 +47,7 @@ if (activeUser == null) {
 					<div class="row mt-2 mb-2">
 						<div class="col-md-4">
 							<div class="container text-center">
-								<img src="Images/profile.png" style="max-width: 60px;"
+								<img src="images/profile.png" style="max-width: 60px;"
 									class="img-fluid">
 							</div>
 						</div>
@@ -78,7 +78,7 @@ if (activeUser == null) {
 			<div class="col-md-9">
 				<div class="card">
 					<div id="profile">
-						<%@include file="Components/alert_message.jsp"%>
+						<%@include file="components/alert_message.jsp"%>
 						<%@include file="personalInfo.jsp"%>
 					</div>
 					<div id="wishlist" style="display: none;">

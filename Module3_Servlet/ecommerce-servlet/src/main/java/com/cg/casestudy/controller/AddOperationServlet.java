@@ -103,7 +103,7 @@ public class AddOperationServlet extends HttpServlet {
 			case "updateProduct": {
 				int pid = Integer.parseInt(request.getParameter("pid"));
 				String name = request.getParameter("name");
-				float price = Float.parseFloat(request.getParameter("price"));
+				int price = Integer.parseInt(request.getParameter("price"));
 				String description = request.getParameter("description");
 				int quantity = Integer.parseInt(request.getParameter("quantity"));
 				int discount = Integer.parseInt(request.getParameter("discount"));

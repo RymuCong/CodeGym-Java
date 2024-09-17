@@ -1,7 +1,7 @@
 <%@page import="com.cg.casestudy.entity.Message"%>
 <%@page import="com.cg.casestudy.entity.Product"%>
 <%@page import="com.cg.casestudy.service.ProductServiceImpl"%>
-<%@ page import="com.cg.casestudy.service.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
 <%@page errorPage="error_exception.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -19,11 +19,11 @@ if (activeAdmin == null) {
 <head>
 <meta charset="ISO-8859-1">
 <title>Update Product</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<!-- update product -->
 	<%

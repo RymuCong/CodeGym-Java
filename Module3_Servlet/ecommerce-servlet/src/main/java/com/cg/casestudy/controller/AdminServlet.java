@@ -13,9 +13,8 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/AdminServlet")
 public class AdminServlet extends HttpServlet {
-    @Override
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
 		AdminServiceImpl adminService = new AdminServiceImpl();
 
 		String operation = request.getParameter("operation");
@@ -23,15 +22,32 @@ public class AdminServlet extends HttpServlet {
 		Message message = null;
 		if (operation != null) {
 			switch (operation.trim()) {
-				case "save":
-					String name = request.getParameter("name");
+				case "login":
 					String email = request.getParameter("email");
 					String password = request.getParameter("password");
-					String phone = request.getParameter("phone");
 
-					Admin admin = new Admin(name, email, phone, password);
+					Admin admin = adminService.getAdminByEmailAndPassword(email, password);
 
-					boolean saveFlag = adminService.saveAdmin(admin);
+					if (admin != null) {
+						session.setAttribute("activeAdmin", admin);
+						message = new Message("Login successful!", "success", "alert-success");
+						session.setAttribute("message", message);
+						response.sendRedirect("admin.jsp");
+						return;
+					} else {
+						message = new Message("Invalid credentials!", "error", "alert-danger");
+					}
+					break;
+
+				case "save":
+					String new_name = request.getParameter("name");
+					String new_email = request.getParameter("email");
+					String new_password = request.getParameter("password");
+					String new_phone = request.getParameter("phone");
+
+					Admin new_admin = new Admin(new_name, new_email, new_phone, new_password);
+
+					boolean saveFlag = adminService.saveAdmin(new_admin);
 
 					if (saveFlag) {
 						message = new Message("New admin registered successfully!", "success", "alert-success");

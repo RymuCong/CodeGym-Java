@@ -5,7 +5,7 @@ public class OrderedProduct {
 	private int id;
 	private String name;
 	private int quantity;
-	private float price;
+	private int price;
 	private String image;
 	private int orderId;
 	
@@ -13,7 +13,7 @@ public class OrderedProduct {
 
 	}
 
-	public OrderedProduct(String name, int quantity, float price, String image, int orderId) {
+	public OrderedProduct(String name, int quantity, int price, String image, int orderId) {
 		super();
 		this.name = name;
 		this.quantity = quantity;
@@ -46,11 +46,11 @@ public class OrderedProduct {
 		this.quantity = quantity;
 	}
 
-	public float getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

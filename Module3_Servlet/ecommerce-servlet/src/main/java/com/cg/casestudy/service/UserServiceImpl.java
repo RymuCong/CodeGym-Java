@@ -2,6 +2,7 @@ package com.cg.casestudy.service;
 
 import com.cg.casestudy.DatabaseConnection;
 import com.cg.casestudy.entity.User;
+import com.cg.casestudy.utils.ConnectionProvider;
 
 import java.sql.*;
         import java.util.ArrayList;
@@ -11,12 +12,7 @@ public class UserServiceImpl implements UserService {
     private static Connection con;
 
     static {
-        try {
-            DatabaseConnection dataBaseConnection = new DatabaseConnection();
-            con = dataBaseConnection.getConnection();
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }
+        con = ConnectionProvider.getConnection();
     }
 
     public UserServiceImpl() {

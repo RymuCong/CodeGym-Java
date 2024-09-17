@@ -1,7 +1,8 @@
 <%@page import="com.cg.casestudy.service.ProductServiceImpl"%>
 <%@page import="com.cg.casestudy.entity.Product"%>
-<%@ page import="com.cg.casestudy.service.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.cg.casestudy.utils.PriceFormatter" %>
 <%@page errorPage="error_exception.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -15,7 +16,7 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 <head>
 <meta charset="ISO-8859-1">
 <title>Home</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 <style type="text/css">
 .cus-card {
 	border-radius: 50%;
@@ -43,35 +44,35 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<!-- Category list -->
-	<div class="container-fluid px-3 py-3"
-		style="background-color: #e3f7fc;">
-		<div class="row">
-			<div class="card-group">
-				<%
-				for (Category c : categoryList) {
-				%>
-				<div class="col text-center">
-					<a href="products.jsp?category=<%=c.getCategoryId()%>"
-						style="text-decoration: none;">
-						<div class="card cus-card h-100">
-							<div class="container text-center">
-								<img src="Product_imgs\<%=c.getCategoryImage()%>" class="mt-3 "
-									style="max-width: 100%; max-height: 100px; width: auto; height: auto;">
-							</div>
-							<h6><%=c.getCategoryName()%></h6>
-						</div>
-					</a>
-				</div>
+<%--	<div class="container-fluid px-3 py-3"--%>
+<%--		style="background-color: #e3f7fc;">--%>
+<%--		<div class="row">--%>
+<%--			<div class="card-group">--%>
+<%--				<%--%>
+<%--				for (Category c : categoryList) {--%>
+<%--				%>--%>
+<%--				<div class="col text-center">--%>
+<%--					<a href="products.jsp?category=<%=c.getCategoryId()%>"--%>
+<%--						style="text-decoration: none;">--%>
+<%--						<div class="card cus-card h-100">--%>
+<%--							<div class="container text-center">--%>
+<%--								<img src="Product_imgs\<%=c.getCategoryImage()%>" class="mt-3 "--%>
+<%--									style="max-width: 100%; max-height: 100px; width: auto; height: auto;">--%>
+<%--							</div>--%>
+<%--							<h6><%=c.getCategoryName()%></h6>--%>
+<%--						</div>--%>
+<%--					</a>--%>
+<%--				</div>--%>
 
-				<%
-				}
-				%>
-			</div>
-		</div>
-	</div>
+<%--				<%--%>
+<%--				}--%>
+<%--				%>--%>
+<%--			</div>--%>
+<%--		</div>--%>
+<%--	</div>--%>
 <%--	<!-- end of list -->--%>
 
 	<!-- Carousel -->
@@ -79,13 +80,13 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 		class="carousel slide carousel-dark mt-3 mb-3" data-bs-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="Images/scroll_img2.png" class="d-block w-100" alt="...">
+				<img src="images/scroll_img2.png" class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item">
-				<img src="Images/scroll_img1.png" class="d-block w-100" alt="...">
+				<img src="images/scroll_img1.png" class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item">
-				<img src="Images/scroll_img3.png" class="d-block w-100" alt="...">
+				<img src="images/scroll_img3.png" class="d-block w-100" alt="...">
 			</div>
 		</div>
 		<button class="carousel-control-prev" type="button"
@@ -107,9 +108,9 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 			<div class="col">
 				<div class="container text-center px-5 py-5">
 					<h1>Latest Products</h1>
-					<img src="Images/product.png" class="card-img-top"
-						style="max-width: 100%; max-height: 200px; width: auto;" alt="">
-				</div>s
+<%--					<img src="images/product.png" class="card-img-top"--%>
+<%--						style="max-width: 100%; max-height: 200px; width: auto;" alt="">--%>
+				</div>
 			</div>
 			<%
 			for (int i = 0; i < Math.min(3, productList.size()); i++) {
@@ -128,8 +129,8 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 							<h5 class="card-title text-center"><%=productList.get(i).getProductName()%></h5>
 
 							<div class="container text-center">
-								<span class="real-price"><%=productList.get(i).getProductPriceAfterDiscount()%></span>
-								&ensp;<span class="product-price"><%=productList.get(i).getProductPrice()%>
+								<span class="real-price"><%=PriceFormatter.formatPrice(productList.get(i).getProductPriceAfterDiscount())%></span>
+								&ensp;<span class="product-price"><%=PriceFormatter.formatPrice(productList.get(i).getProductPrice())%>
 								</span>&ensp;<span class="product-discount"><%=productList.get(i).getProductDiscount()%>&#37;
 									off</span>
 							</div>
@@ -165,8 +166,8 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 							<h5 class="card-title text-center"><%=topDeals.get(i).getProductName()%></h5>
 
 							<div class="container text-center">
-								<span class="real-price"><%=topDeals.get(i).getProductPriceAfterDiscount()%></span>
-								&ensp;<span class="product-price"><%=topDeals.get(i).getProductPrice()%>
+								<span class="real-price"><%=PriceFormatter.formatPrice(topDeals.get(i).getProductPriceAfterDiscount())%></span>
+								&ensp;<span class="product-price"><%=PriceFormatter.formatPrice(topDeals.get(i).getProductPrice())%>
 								</span>&ensp;<span class="product-discount"><%=topDeals.get(i).getProductDiscount()%>&#37;
 									off</span>
 							</div>
@@ -182,29 +183,29 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 	<!-- end -->
 
 	<!-- confirmation message for successful order -->
-	<%
-	String order = (String) session.getAttribute("order");
-	if (order != null) {
-	%>
-	<script type="text/javascript">
-		console.log("testing..4...");
-		Swal.fire({
-		  icon : 'success',
-		  title: 'Order Placed, Thank you!',
-		  text: 'Confirmation will be sent to <%=user.getEmail()%>',
-		  width: 600,
-		  padding: '3em',
-		  showConfirmButton : false,
-		  timer : 3500,
-		  backdrop: `
-		    rgba(0,0,123,0.4)
-		  `
-		});
-	</script>
-	<%
-	}
-	session.removeAttribute("order");
-	%>
+<%--	<%--%>
+<%--	String order = (String) session.getAttribute("order");--%>
+<%--	if (order != null) {--%>
+<%--	%>--%>
+<%--	<script type="text/javascript">--%>
+<%--		console.log("testing..4...");--%>
+<%--		Swal.fire({--%>
+<%--		  icon : 'success',--%>
+<%--		  title: 'Order Placed, Thank you!',--%>
+<%--		  text: 'Confirmation will be sent to <%=user.getEmail()%>',--%>
+<%--		  width: 600,--%>
+<%--		  padding: '3em',--%>
+<%--		  showConfirmButton : false,--%>
+<%--		  timer : 3500,--%>
+<%--		  backdrop: `--%>
+<%--		    rgba(0,0,123,0.4)--%>
+<%--		  `--%>
+<%--		});--%>
+<%--	</script>--%>
+<%--	<%--%>
+<%--	}--%>
+<%--	session.removeAttribute("order");--%>
+<%--	%>--%>
 	<!-- end of message -->
 
 </body>

@@ -16,11 +16,11 @@ if (activeAdmin == null) {
 <head>
 <meta charset="ISO-8859-1">
 <title>Update Category</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<!-- update category -->
 	<%

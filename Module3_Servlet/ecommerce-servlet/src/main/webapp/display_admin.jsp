@@ -18,7 +18,7 @@ List<Admin> adminList = AdminServiceImpl.getAllAdmins();
 <head>
 <meta charset="ISO-8859-1">
 <title>View Admin's</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 <style>
 label {
 	font-weight: bold;
@@ -27,7 +27,7 @@ label {
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<div class="container-fluid px-5 py-3">
 		<div class="row">
@@ -35,11 +35,11 @@ label {
 				<div class="card">
 					<div class="card-body px-3">
 						<div class="container text-center">
-							<img src="Images/admin.png" style="max-width: 100px;"
+							<img src="images/admin.png" style="max-width: 100px;"
 								class="img-fluid">
 						</div>
 						<h3 class="text-center">Add Admin</h3>
-						<%@include file="Components/alert_message.jsp"%>
+						<%@include file="components/alert_message.jsp"%>
 
 						<!--admin-form-->
 						<form action="AdminServlet?operation=save" method="post">

@@ -3,6 +3,7 @@ package com.cg.casestudy.controller;
 import com.cg.casestudy.entity.Message;
 import com.cg.casestudy.entity.User;
 import com.cg.casestudy.service.UserService;
+import com.cg.casestudy.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,12 +15,6 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-
-	private final UserService userService;
-
-    public RegisterServlet(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
 			String userAddress = request.getParameter("user_address");
 
 			User user = new User(userName, userEmail, userPassword, userPhone, userGender, userAddress);
+			UserServiceImpl userService = new UserServiceImpl();
 			boolean flag = userService.saveUser(user);
 
 			HttpSession session = request.getSession();

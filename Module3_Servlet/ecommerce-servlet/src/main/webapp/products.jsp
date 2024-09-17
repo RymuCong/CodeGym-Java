@@ -4,7 +4,7 @@
 <%@page import="com.cg.casestudy.entity.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cg.casestudy.service.ProductServiceImpl"%>
-<%@ page import="com.cg.casestudy.service.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
 <%
 User u = (User) session.getAttribute("activeUser");
 
@@ -44,7 +44,7 @@ if (prodList != null && prodList.size() == 0) {
 <head>
 <meta charset="ISO-8859-1">
 <title>Products</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 <style>
 .real-price {
 	font-size: 22px !important;
@@ -78,7 +78,7 @@ if (prodList != null && prodList.size() == 0) {
 </head>
 <body style="background-color: #f0f0f0;">
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<!--show products-->
 	<h4 class="text-center mt-2"><%=message%></h4>

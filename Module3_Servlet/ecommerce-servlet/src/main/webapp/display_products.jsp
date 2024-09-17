@@ -5,7 +5,7 @@
 <%@page import="com.cg.casestudy.service.UserServiceImpl"%>
 <%@page import="com.cg.casestudy.entity.Product"%>
 <%@page import="com.cg.casestudy.service.ProductServiceImpl"%>
-<%@ page import="com.cg.casestudy.service.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
 <%
 Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 if (activeAdmin == null) {
@@ -22,25 +22,26 @@ ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvide
 <head>
 <meta charset="ISO-8859-1">
 <title>View Product's</title>
-<%@include file="Components/common_css_js.jsp"%>
+	<%@include file="components/common_css_js.jsp"%>
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
-
+	<%@include file="components/navbar.jsp"%>
 	<!-- update product -->
 	<div class="container mt-3">
-		<%@include file="Components/alert_message.jsp"%>
-		<table class="table table-hover">
-			<tr class="table-primary text-center" style="font-size: 20px;">
-				<th>Image</th>
-				<th>Name</th>
-				<th class="text-start">Category</th>
-				<th>Price</th>
-				<th class="text-start">Quantity</th>
-				<th class="text-start">Discount</th>
-				<th>Action</th>
-			</tr>
+		<%@include file="components/alert_message.jsp"%>
+		<table id="tableProducts" class="table table-hover table-striped">
+			<thead class="table-primary text-center" style="font-size: 20px;">
+				<tr class="text-center">
+					<th>Image</th>
+					<th>Name</th>
+					<th class="text-start">Category</th>
+					<th>Price</th>
+					<th class="text-start">Quantity</th>
+					<th class="text-start">Discount</th>
+					<th>Action</th>
+				</tr>
+			</thead>
 			<%
 			List<Product> productList = ProductServiceImpl.getAllProducts();
 			for (Product prod : productList) {
@@ -64,5 +65,31 @@ ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvide
 		</table>
 	</div>
 </body>
+
+
+<script src="webjars/jquery/3.5.1/jquery.js"></script>
+<script src="webjars/datatables/1.10.7/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="webjars/datatables/1.10.7/css/jquery.dataTables.min.css">
+
+<script>
+	$(document).ready(function() {
+		$('#tableProducts').DataTable({
+			"dom" : 'lrtip',
+			"lengthChange" : false,
+			"pageLength" : 10,
+			"columns": [
+				{ "data": "Image" },
+				{ "data": "Name" },
+				{ "data": "Category" },
+				{ "data": "Price" },
+				{ "data": "Quantity" },
+				{ "data": "Discount" },
+				{ "data": "Action" }
+			]
+		});
+	});
+</script>
+
 </html>
+
 

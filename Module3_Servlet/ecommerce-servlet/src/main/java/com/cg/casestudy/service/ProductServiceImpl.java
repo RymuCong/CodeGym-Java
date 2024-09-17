@@ -2,22 +2,20 @@ package com.cg.casestudy.service;
 
 import com.cg.casestudy.DatabaseConnection;
 import com.cg.casestudy.entity.Product;
+import com.cg.casestudy.utils.ConnectionProvider;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.cg.casestudy.utils.PriceFormatter.formatPrice;
 
 public class ProductServiceImpl implements ProductService {
 
     private static Connection con;
 
     static {
-        try {
-            DatabaseConnection dataBaseConnection = new DatabaseConnection();
-            con = dataBaseConnection.getConnection();
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }
+        con = ConnectionProvider.getConnection();
     }
 
     public ProductServiceImpl() {
@@ -36,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     private static final String UPDATE_PRODUCT = "update product set name = ?, price = ?, quantity = ?, description = ?, image = ?, cid = ? where pid = ?";
     private static final String GET_PRODUCTS_BY_CATEGORY = "select * from product where cid = ?";
     private static final String SEARCH_PRODUCTS = "select * from product where lower(name) like ? or lower(description) like ?";
-    private static final String GET_DISCOUNTED_PRODUCTS = "select * from product where discount >= 30 order by discount desc";
+    private static final String GET_DISCOUNTED_PRODUCTS = "select * from product where discount >= 20 order by discount desc";
     private static final String UPDATE_PRODUCT_QUANTITY = "update product set quantity = ? where pid = ?";
     private static final String GET_TOTAL_PRODUCT = "select count(*) from product";
     private static final String GET_PRODUCT_PRICE_BY_ID = "select price, discount from product where pid = ?";
@@ -48,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
         boolean flag = false;
         try (PreparedStatement statement = con.prepareStatement(SAVE_PRODUCT)) {
             statement.setString(1, product.getProductName());
-            statement.setFloat(2, product.getProductPrice());
+            statement.setInt(2, product.getProductPrice());
             statement.setInt(3, product.getProductQuantity());
             statement.setString(4, product.getProductDescription());
             statement.setString(5, product.getProductImages());
@@ -71,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
                 product.setProductId(rs.getInt("pid"));
                 product.setProductName(rs.getString("name"));
                 product.setProductDescription(rs.getString("description"));
-                product.setProductPrice(rs.getFloat("price"));
+                product.setProductPrice(rs.getInt("price"));
                 product.setProductQuantity(rs.getInt("quantity"));
                 product.setProductDiscount(rs.getInt("discount"));
                 product.setProductImages(rs.getString("image"));
@@ -95,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setProductId(rs.getInt("pid"));
                     product.setProductName(rs.getString("name"));
                     product.setProductDescription(rs.getString("description"));
-                    product.setProductPrice(rs.getFloat("price"));
+                    product.setProductPrice(rs.getInt("price"));
                     product.setProductQuantity(rs.getInt("quantity"));
                     product.setProductDiscount(rs.getInt("discount"));
                     product.setProductImages(rs.getString("image"));
@@ -126,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
         boolean flag = false;
         try (PreparedStatement statement = con.prepareStatement(UPDATE_PRODUCT)) {
             statement.setString(1, product.getProductName());
-            statement.setFloat(2, product.getProductPrice());
+            statement.setInt(2, product.getProductPrice());
             statement.setInt(3, product.getProductQuantity());
             statement.setString(4, product.getProductDescription());
             statement.setString(5, product.getProductImages());
@@ -151,7 +149,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setProductId(rs.getInt("pid"));
                     product.setProductName(rs.getString("name"));
                     product.setProductDescription(rs.getString("description"));
-                    product.setProductPrice(rs.getFloat("price"));
+                    product.setProductPrice(rs.getInt("price"));
                     product.setProductQuantity(rs.getInt("quantity"));
                     product.setProductDiscount(rs.getInt("discount"));
                     product.setProductImages(rs.getString("image"));
@@ -178,7 +176,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setProductId(rs.getInt("pid"));
                     product.setProductName(rs.getString("name"));
                     product.setProductDescription(rs.getString("description"));
-                    product.setProductPrice(rs.getFloat("price"));
+                    product.setProductPrice(rs.getInt("price"));
                     product.setProductQuantity(rs.getInt("quantity"));
                     product.setProductDiscount(rs.getInt("discount"));
                     product.setProductImages(rs.getString("image"));
@@ -202,7 +200,7 @@ public class ProductServiceImpl implements ProductService {
                 product.setProductId(rs.getInt("pid"));
                 product.setProductName(rs.getString("name"));
                 product.setProductDescription(rs.getString("description"));
-                product.setProductPrice(rs.getFloat("price"));
+                product.setProductPrice(rs.getInt("price"));
                 product.setProductQuantity(rs.getInt("quantity"));
                 product.setProductDiscount(rs.getInt("discount"));
                 product.setProductImages(rs.getString("image"));
@@ -285,7 +283,7 @@ public class ProductServiceImpl implements ProductService {
                 product.setProductId(rs.getInt("pid"));
                 product.setProductName(rs.getString("name"));
                 product.setProductDescription(rs.getString("description"));
-                product.setProductPrice(rs.getFloat("price"));
+                product.setProductPrice(rs.getInt("price"));
                 product.setProductQuantity(rs.getInt("quantity"));
                 product.setProductDiscount(rs.getInt("discount"));
                 product.setProductImages(rs.getString("image"));

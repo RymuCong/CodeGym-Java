@@ -7,7 +7,10 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     private final Connection connection;
-    private static final String URL = "jdbc:mysql://localhost:3306/e-commerce-servlet";
+    // home pc
+//    private static final String URL = "jdbc:mysql://localhost:3306/e-commerce-servlet";
+    // laptop
+    private static final String URL = "jdbc:mysql://localhost:4040/e-commerce-servlet";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 

@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Create new password</title>
-<%@include file="Components/common_css_js.jsp"%>
+<%@include file="components/common_css_js.jsp"%>
 <style>
 label {
 	font-weight: bold;
@@ -14,7 +14,7 @@ label {
 </head>
 <body>
 	<!--navbar -->
-	<%@include file="Components/navbar.jsp"%>
+	<%@include file="components/navbar.jsp"%>
 
 	<div class="container-fluid ">
 		<div class="row mt-5">
@@ -23,13 +23,13 @@ label {
 					<div class="card-body px-5">
 
 						<div class="container text-center">
-							<img src="Images/forgot-password.png" style="max-width: 100px;"
+							<img src="images/forgot-password.png" style="max-width: 100px;"
 								class="img-fluid">
 						</div>
 						<h3 class="text-center mt-3">Update Password</h3>
-						<%@include file="Components/alert_message.jsp"%>
+						<%@include file="components/alert_message.jsp"%>
 
-						<form action="ChangePasswordServlet" method="post">
+						<form action="" method="post">
 							<div class="mb-3 mt-3">
 								<label class="form-label">New Password</label> <input
 									type="password" name="password" id="password"
@@ -54,7 +54,7 @@ label {
 		var confirm_password = document.getElementById("confirm_password");
 
 		function validatePassword() {
-			if (password.value != confirm_password.value) {
+			if (password.value !== confirm_password.value) {
 				confirm_password.setCustomValidity("Passwords Don't Match");
 			} else {
 				confirm_password.setCustomValidity('');
