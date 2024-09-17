@@ -36,8 +36,10 @@ public class AddOperationServlet extends HttpServlet {
 				Category category = new Category(categoryName, part.getSubmittedFileName());
 				boolean flag = categoryService.saveCategory(category);
 
-				String path = request.getServletContext().getRealPath("/") + "Category" + File.separator + part.getSubmittedFileName();
+				String path = request.getServletContext().getRealPath("/") + "data_images" +File.separator + "category" + File.separator + part.getSubmittedFileName();
 				saveImage(part, path);
+				System.out.println(path);
+				System.out.println(part.getSubmittedFileName());
 
 				if (flag) {
 					message = new Message("Category added successfully!!", "success", "alert-success");
@@ -63,7 +65,7 @@ public class AddOperationServlet extends HttpServlet {
 				Product product = new Product(pName, pDesc, pPrice, pDiscount, pQuantity, part.getSubmittedFileName(), categoryType);
 				boolean flag = productService.saveProduct(product);
 
-				String path = request.getServletContext().getRealPath("/") + "Product" + File.separator + part.getSubmittedFileName();
+				String path = request.getServletContext().getRealPath("/") + "data_images/product/" + File.separator + part.getSubmittedFileName();
 				saveImage(part, path);
 
 				if (flag) {
@@ -86,7 +88,7 @@ public class AddOperationServlet extends HttpServlet {
 				} else {
 					Category category = new Category(cid, name, part.getSubmittedFileName());
 					categoryService.updateCategory(category);
-					String path = request.getServletContext().getRealPath("/") + "Category" + File.separator + part.getSubmittedFileName();
+					String path = request.getServletContext().getRealPath("/") + "data_images/category/" + File.separator + part.getSubmittedFileName();
 					saveImage(part, path);
 				}
 				message = new Message("Category updated successfully!!", "success", "alert-success");
@@ -122,7 +124,7 @@ public class AddOperationServlet extends HttpServlet {
 				} else {
 					Product product = new Product(pid, name, description, price, discount, quantity, part.getSubmittedFileName(), cid);
 					productService.updateProduct(product);
-					String path = request.getServletContext().getRealPath("/") + "Product" + File.separator + part.getSubmittedFileName();
+					String path = request.getServletContext().getRealPath("/") + "data_images/product/" + File.separator + part.getSubmittedFileName();
 					saveImage(part, path);
 				}
 				message = new Message("Product updated successfully!!", "success", "alert-success");
@@ -146,7 +148,9 @@ public class AddOperationServlet extends HttpServlet {
 
 	private void saveImage(Part part, String path) throws IOException {
 		File file = new File(path);
-		file.getParentFile().mkdirs();
+		if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+			throw new IOException("Failed to create directory: " + file.getParentFile());
+		}
 		try (FileOutputStream fos = new FileOutputStream(file);
 			 InputStream is = part.getInputStream()) {
 			byte[] data = new byte[is.available()];

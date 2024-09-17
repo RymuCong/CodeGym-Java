@@ -1,14 +1,11 @@
 package com.cg.casestudy.service;
 
-import com.cg.casestudy.DatabaseConnection;
 import com.cg.casestudy.entity.Product;
 import com.cg.casestudy.utils.ConnectionProvider;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.cg.casestudy.utils.PriceFormatter.formatPrice;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -27,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
         ProductServiceImpl.con = con;
     }
 
-    private static final String SAVE_PRODUCT = "insert into product(name, price, quantity, description, image, cid) values(?, ?, ?, ?, ?, ?)";
+    private static final String SAVE_PRODUCT = "insert into product(name, price, quantity, description, image, cid, discount) values(?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_ALL_PRODUCTS = "select * from product";
     private static final String GET_PRODUCT_BY_ID = "select * from product where pid = ?";
     private static final String DELETE_PRODUCT = "delete from product where pid = ?";
@@ -51,6 +48,7 @@ public class ProductServiceImpl implements ProductService {
             statement.setString(4, product.getProductDescription());
             statement.setString(5, product.getProductImages());
             statement.setInt(6, product.getCategoryId());
+            statement.setInt(7, product.getProductDiscount());
             statement.executeUpdate();
             flag = true;
         } catch (SQLException e) {

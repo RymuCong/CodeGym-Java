@@ -38,10 +38,11 @@ if (activeAdmin == null) {
 				for (Category c : categoryList) {
 				%>
 				<tr class="text-center">
-					<td><img src="Product_imgs\<%=c.getCategoryImage()%>"
+					<td><img src="data_images\category\<%=c.getCategoryImage()%>"
 						style="width: 60px; height: 60px; width: auto;"></td>
 					<td><%=c.getCategoryName()%></td>
-					<td><a href="update_category.jsp?cid=<%=c.getCategoryId()%>" role="button" class="btn btn-secondary">Update</a>&emsp;<a
+					<td><a href="update_category.jsp?cid=<%=c.getCategoryId()%>" role="button" class="btn btn-secondary">Update</a>&emsp;
+						<a id="deleteCategory"
 						href="AddOperationServlet?cid=<%=c.getCategoryId()%>&operation=deleteCategory"
 						class="btn btn-danger" role="button">Delete</a></td>
 				</tr>
@@ -53,10 +54,6 @@ if (activeAdmin == null) {
 	</div>
 
 </body>
-<script src="webjars/jquery/3.5.1/jquery.js"></script>
-<script src="webjars/datatables/1.10.7/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="webjars/datatables/1.10.7/css/jquery.dataTables.min.css">
-
 <script>
 	$(document).ready(function() {
 		$('#tableCategories').DataTable({
@@ -70,5 +67,29 @@ if (activeAdmin == null) {
 			]
 		});
 	});
+
+	// Attach the click event handler to the delete button
+	$(document).on('click', '#deleteCategory', function(e) {
+		e.preventDefault();
+		var url = $(this).attr('href');
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted you will not be able to recover this category!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location.href = url;
+					} else {
+						swal("Your category is safe!");
+					}
+				});
+	});
 </script>
+
+<%--<script src="webjars/jquery/3.5.1/jquery.js"></script>--%>
+<script src="webjars/datatables/1.10.7/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="webjars/datatables/1.10.7/css/jquery.dataTables.min.css">
 </html>

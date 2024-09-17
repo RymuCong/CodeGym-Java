@@ -1,6 +1,5 @@
 package com.cg.casestudy.service;
 
-import com.cg.casestudy.DatabaseConnection;
 import com.cg.casestudy.entity.Category;
 import com.cg.casestudy.utils.ConnectionProvider;
 
