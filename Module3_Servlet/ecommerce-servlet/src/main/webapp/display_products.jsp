@@ -11,7 +11,7 @@ Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 if (activeAdmin == null) {
 	Message message = new Message("You are not logged in! Login first!!", "error", "alert-danger");
 	session.setAttribute("message", message);
-	response.sendRedirect("adminlogin.jsp");
+	response.sendRedirect("login.jsp");
 	return;
 }
 UserServiceImpl UserServiceImpl = new UserServiceImpl(ConnectionProvider.getConnection());
@@ -48,7 +48,7 @@ ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvide
 				String category = catDao.getCategoryNameById(prod.getCategoryId());
 			%>
 			<tr class="text-center">
-				<td><img src="Product_imgs\<%=prod.getProductImages()%>"
+				<td><img src="<%=prod.getProductImages()%>"
 					style="width: 60px; height: 60px; width: auto;"></td>
 				<td class="text-start"><%=prod.getProductName()%></td>
 				<td><%=category%></td>
@@ -56,7 +56,7 @@ ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvide
 				<td><%=prod.getProductQuantity()%></td>
 				<td><%=prod.getProductDiscount()%>%</td>
 				<td><a href="update_product.jsp?pid=<%=prod.getProductId()%>" role="button" class="btn btn-secondary">Update</a>&emsp;<a
-					href="AddOperationServlet?pid=<%=prod.getProductId()%>&operation=deleteProduct"
+					href="AddOperationServlet?pid=<%=prod.getProductId()%>&operation=deleteProduct" id="deleteProduct"
 					class="btn btn-danger" role="button">Delete</a></td>
 			</tr>
 			<%
@@ -87,6 +87,26 @@ ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvide
 				{ "data": "Action" }
 			]
 		});
+	});
+
+	// Attach the click event handler to the delete button
+	$(document).on('click', '#deleteProduct', function(e) {
+		e.preventDefault();
+		var url = $(this).attr('href');
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted you will not be able to recover this product!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location.href = url;
+					} else {
+						swal("Your product is safe!");
+					}
+				});
 	});
 </script>
 

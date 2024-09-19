@@ -145,7 +145,7 @@
 									</div>
 									<div class="mb-2">
 										<label class="form-label"><b>Product Image</b></label> <input
-											type="file" name="photo" class="form-control" required>
+											type="file" name="product_img" class="form-control" id="product_img" required>
 									</div>
 								</div>
 								<div class="modal-footer" style="color: #f2f2f2">
@@ -212,6 +212,11 @@
 						<i class="fa-solid fa-user-slash" style="color: #fafafa;"></i>&nbsp;Logout
 					</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="showCart?uid=<%=user.getId()%>">
+						<i class="fa-solid fa-shopping-cart" style="color: #ffffff;"></i>&nbsp;Cart
+					</a>
+				</li>
 				<%
 				} else {
 				%>
@@ -225,10 +230,6 @@
 						<i class="fa-solid fa-user-lock" style="color: #fafafa;"></i>&nbsp;Login
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="adminlogin.jsp">&nbsp;Admin</a>
-				</li>
-
 				<%
 					}
 				%>

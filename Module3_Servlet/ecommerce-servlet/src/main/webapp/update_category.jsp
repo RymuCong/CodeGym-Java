@@ -7,7 +7,7 @@ Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 if (activeAdmin == null) {
 	Message message = new Message("You are not logged in! Login first!!", "error", "alert-danger");
 	session.setAttribute("message", message);
-	response.sendRedirect("adminlogin.jsp");
+	response.sendRedirect("login.jsp");
 	return;
 }
 %>
@@ -48,7 +48,7 @@ if (activeAdmin == null) {
 							</div>
 							<div class="mb-3">
 								<label class="form-label"><b>Uploaded Image:&nbsp;</b></label><%=category.getCategoryImage()%>&emsp;<img
-									src="Product_imgs\<%=category.getCategoryImage()%>"
+									src="<%=category.getCategoryImage()%>"
 									style="width: 80px; height: 80px; width: auto;">
 								<input type="hidden" name="image" value="<%=category.getCategoryImage()%>">
 							</div>

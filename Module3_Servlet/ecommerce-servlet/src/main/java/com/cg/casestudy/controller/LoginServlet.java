@@ -17,58 +17,36 @@ import java.io.IOException;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    @Override
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String login = request.getParameter("login");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 
-		System.out.println("Hello from LoginServlet");
+		HttpSession session = request.getSession();
 
-        if (login.trim().equals("user")) {
-			try {
-				String userEmail = request.getParameter("user_email");
-				String userPassword = request.getParameter("user_password");
+		// Check if the user is an admin
+		AdminServiceImpl adminService = new AdminServiceImpl();
+		Admin admin = adminService.getAdminByEmailAndPassword(email, password);
 
-				// getting user through entered email and password
-				UserServiceImpl userService = new UserServiceImpl();
-				User user = userService.getByEmailPassword(userEmail, userPassword);
+		if (admin != null) {
+			session.setAttribute("activeAdmin", admin);
+			response.sendRedirect("admin.jsp");
+			return;
+		}
 
-				// storing current user in session
-				HttpSession session = request.getSession();
-				if (user != null) {
-					session.setAttribute("activeUser", user);
-					response.sendRedirect("index.jsp");
-				} else {
-					Message message = new Message("Invalid details! Try again!!", "error", "alert-danger");
-					session.setAttribute("message", message);
-					response.sendRedirect("login.jsp");
-				}
+		// Check if the user is a regular user
+		UserServiceImpl userService = new UserServiceImpl();
+		User user = userService.getByEmailPassword(email, password);
 
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
-		} else if (login.trim().equals("admin")) {
-			try {
-				String userName = request.getParameter("email");
-				String password = request.getParameter("password");
-				System.out.println(userName + " " + password);
-
-				AdminServiceImpl adminService = new AdminServiceImpl();
-				Admin admin = adminService.getAdminByEmailAndPassword(userName, password);
-
-				HttpSession session = request.getSession();
-				if (admin != null) {
-					session.setAttribute("activeAdmin", admin);
-					response.sendRedirect("admin.jsp");
-				} else {
-					Message message = new Message("Invalid details! Try again!!", "error", "alert-danger");
-					session.setAttribute("message", message);
-					response.sendRedirect("adminlogin.jsp");
-				}
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
+		if (user != null) {
+			session.setAttribute("activeUser", user);
+			response.sendRedirect("index.jsp");
+		} else {
+			Message message = new Message("Invalid details! Try again!!", "error", "alert-danger");
+			session.setAttribute("message", message);
+			response.sendRedirect("login.jsp");
 		}
 	}
 }

@@ -58,12 +58,21 @@ public class AdminServlet extends HttpServlet {
 
 				case "delete":
 					int id = Integer.parseInt(request.getParameter("id"));
-					boolean deleteFlag = adminService.deleteAdmin(id);
+					Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 
-					if (deleteFlag) {
-						message = new Message("Admin deleted successfully!", "success", "alert-success");
+					if (activeAdmin != null && activeAdmin.getId() == id) {
+						adminService.deleteAdmin(id);
+						session.invalidate();
+						response.sendRedirect("login.jsp");
+						return;
 					} else {
-						message = new Message("Sorry! Something went wrong", "error", "alert-danger");
+						boolean deleteFlag = adminService.deleteAdmin(id);
+
+						if (deleteFlag) {
+							message = new Message("Admin deleted successfully!", "success", "alert-success");
+						} else {
+							message = new Message("Sorry! Something went wrong", "error", "alert-danger");
+						}
 					}
 					break;
 

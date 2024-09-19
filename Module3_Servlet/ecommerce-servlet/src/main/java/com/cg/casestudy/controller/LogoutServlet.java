@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
 			session.removeAttribute("activeAdmin");
 			Message message = new Message("Logout successfully!!", "success", "alert-success");
 			session.setAttribute("message", message);
-			response.sendRedirect("adminlogin.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	}
 
