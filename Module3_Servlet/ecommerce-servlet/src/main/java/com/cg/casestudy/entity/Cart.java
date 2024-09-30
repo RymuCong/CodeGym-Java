@@ -2,32 +2,44 @@ package com.cg.casestudy.entity;
 
 public class Cart {
 
-//	private int userId;
-	private Product product;
+	private int cartId;
+	private int userId;
+	private int productId;
 	private int quantity;
-	
+
 	public Cart() {
+		super();
 	}
 
-	public Cart(Product product, int quantity) {
-		this.product = product;
+	public Cart(int userId, int productId, int quantity) {
+		super();
+		this.userId = userId;
+		this.productId = productId;
 		this.quantity = quantity;
 	}
 
-	//	public int getId() {
-//		return userId;
-//	}
-//
-//	public void setId(int userId) {
-//		this.userId = userId;
-//	}
-
-	public Product getProduct() {
-		return product;
+	public int getCartId() {
+		return cartId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public int getQuantity() {
@@ -37,6 +49,5 @@ public class Cart {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
+
 }

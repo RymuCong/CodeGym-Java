@@ -61,11 +61,11 @@ Product product = ProductServiceImpl.getProductById(productId);
 							String availability = product.getProductQuantity() > 0 ? "Available" : "Out of stock";
 						%>
   						<%= availability %>
-					</span><br> <span class="fs-5"><b>Category: </b></span> <span><%=catDao.getCategoryNameById(product.getCategoryId())%></span>
+					</span><br> <span class="fs-5"><b>Category: </b></span> <span><%=catService.getCategoryNameById(product.getCategoryId())%></span>
 					<form method="post">
 						<div class="container-fluid text-center mt-3">
 							<%
-							if (user == null) {
+							if (user == null && admin == null) {
 							%>
 							<button type="button" onclick="window.open('login.jsp', '_self')"
 								class="btn btn-primary text-white btn-lg">Add to cart</button>
@@ -73,16 +73,23 @@ Product product = ProductServiceImpl.getProductById(productId);
 							<button type="button" onclick="window.open('login.jsp', '_self')"
 								class="btn btn-info text-white btn-lg">Buy now</button>
 							<%
-							} else {
+							} else if (user != null) {
 							%>
 							<button type="submit"
-<%--								formaction="./AddToCartServlet?uid=<%=user.getId()%>&pid=<%=product.getProductId()%>"--%>
-									formaction="#"
+									formaction="./AddToCart?uid=<%=user.getId()%>&pid=<%=product.getProductId()%>"
 								class="btn btn-primary text-white btn-lg">Add to cart</button>
 							&emsp; <a
 								href="checkout.jsp" id="buy-btn"
 								class="btn btn-info text-white btn-lg" role="button"
 								aria-disabled="true">Buy now</a>
+							<%
+							} else {
+							%>
+								<button type="button"
+								class="btn btn-primary text-white btn-lg">Add to cart</button>
+										&emsp;
+								<button type="button"
+								class="btn btn-info text-white btn-lg">Buy now</button>
 							<%
 							}
 							%>
@@ -94,16 +101,17 @@ Product product = ProductServiceImpl.getProductById(productId);
 	</div>
 	<script>
 		$(document).ready(function() {
-			if ($('#availability').text().trim() == "Currently Out of stock") {
+			if ($('#availability').text().trim() === "Out of stock") {
 				$('#availability').css('color', 'red');
-				$('.btn').addClass('disabled');
+				$('#add-to-cart-btn').addClass('disabled').attr('disabled', true);
+				$('#buy-btn').addClass('disabled').attr('aria-disabled', 'true');
 			}
 			$('#buy-btn').click(function(){
 				<%
-				session.setAttribute("pid", productId);
-				session.setAttribute("from", "buy");
-				%>	
-				});
+                session.setAttribute("pid", productId);
+                session.setAttribute("form", "buy");
+                %>
+			});
 		});
 	</script>
 </body>

@@ -81,9 +81,6 @@ if (activeUser == null) {
 						<%@include file="components/alert_message.jsp"%>
 						<%@include file="personalInfo.jsp"%>
 					</div>
-					<div id="wishlist" style="display: none;">
-						<%@include file="wishlist.jsp"%>  
-					</div>
 					<div id="order" style="display: none;">
 						<%@include file="order.jsp"%>    
 					</div>

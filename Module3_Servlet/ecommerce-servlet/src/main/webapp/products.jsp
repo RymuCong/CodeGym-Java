@@ -34,7 +34,7 @@ if (searchKey != null) {
 if (prodList != null && prodList.size() == 0) {
 
 	message = "No items are available for \""
-	+ (searchKey != null ? searchKey : CategoryServiceImpl.getCategoryById(Integer.parseInt(catId.trim()))) + "\"";
+	+ (searchKey != null ? searchKey : CategoryServiceImpl.getCategoryNameById(Integer.parseInt(catId.trim()))) + "\"";
 
 	prodList = ProductServiceImpl.getAllProducts();
 }
@@ -98,7 +98,7 @@ if (prodList != null && prodList.size() == 0) {
 <%--						<div class="wishlist-icon">--%>
 <%--							<%--%>
 <%--							if (u != null) {--%>
-<%--//								if (wishlistDao.getWishlist(u.getId(), p.getProductId())) {--%>
+<%--//								if (wishlistService.getWishlist(u.getId(), p.getProductId())) {--%>
 <%--							%>--%>
 <%--							<button--%>
 <%--								onclick="window.open('WishlistServlet?uid=<%=u.getId()%>&pid=<%=p.getProductId()%>&op=remove', '_self')"--%>

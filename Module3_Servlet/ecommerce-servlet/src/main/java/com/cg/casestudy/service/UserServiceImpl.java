@@ -236,6 +236,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getName(int userId) {
+        String name = "";
+        try (PreparedStatement statement = con.prepareStatement(GET_USER_BY_ID)) {
+            statement.setInt(1, userId);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    name = rs.getString("name");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return name;
+    }
+
+
+    @Override
     public List<String> getAllUserEmails() {
         List<String> list = new ArrayList<>();
         try (Statement statement = con.createStatement();

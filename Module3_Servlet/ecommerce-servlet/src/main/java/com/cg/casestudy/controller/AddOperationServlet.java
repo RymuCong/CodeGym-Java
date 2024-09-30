@@ -85,14 +85,15 @@ public class AddOperationServlet extends HttpServlet {
 					pDiscount = 0;
 				}
 				int pQuantity = Integer.parseInt(request.getParameter("quantity"));
-				Part part = request.getPart("photo");
+				Part part = request.getPart("product_img");
+				String imageUrl = saveImageToFirebase(part);
 				int categoryType = Integer.parseInt(request.getParameter("categoryType"));
 
-				Product product = new Product(pName, pDesc, pPrice, pDiscount, pQuantity, part.getSubmittedFileName(), categoryType);
+				Product product = new Product(pName, pDesc, pPrice, pDiscount, pQuantity, imageUrl, categoryType);
 				boolean flag = productService.saveProduct(product);
 
-				String path = request.getServletContext().getRealPath("/") + "data_images/product/" + File.separator + part.getSubmittedFileName();
-				saveImage(part, path);
+//				String path = request.getServletContext().getRealPath("/") + "data_images/product/" + File.separator + part.getSubmittedFileName();
+//				saveImage(part, path);
 
 				if (flag) {
 					message = new Message("Product added successfully!!", "success", "alert-success");
@@ -112,10 +113,11 @@ public class AddOperationServlet extends HttpServlet {
 					Category category = new Category(cid, name, image);
 					categoryService.updateCategory(category);
 				} else {
-					Category category = new Category(cid, name, part.getSubmittedFileName());
+					String imageUrl = saveImageToFirebase(part);
+					Category category = new Category(cid, name, imageUrl);
 					categoryService.updateCategory(category);
-					String path = request.getServletContext().getRealPath("/") + "data_images/category/" + File.separator + part.getSubmittedFileName();
-					saveImage(part, path);
+//					String path = request.getServletContext().getRealPath("/") + "data_images/category/" + File.separator + part.getSubmittedFileName();
+//					saveImage(part, path);
 				}
 				message = new Message("Category updated successfully!!", "success", "alert-success");
 				session.setAttribute("message", message);
@@ -139,6 +141,7 @@ public class AddOperationServlet extends HttpServlet {
 					discount = 0;
 				}
 				Part part = request.getPart("product_img");
+//				String imageUrl = saveImageToFirebase(part);
 				int cid = Integer.parseInt(request.getParameter("categoryType"));
 				if (cid == 0) {
 					cid = Integer.parseInt(request.getParameter("category"));
@@ -148,10 +151,11 @@ public class AddOperationServlet extends HttpServlet {
 					Product product = new Product(pid, name, description, price, discount, quantity, image, cid);
 					productService.updateProduct(product);
 				} else {
-					Product product = new Product(pid, name, description, price, discount, quantity, part.getSubmittedFileName(), cid);
+					String imageUrl = saveImageToFirebase(part);
+					Product product = new Product(pid, name, description, price, discount, quantity, imageUrl, cid);
 					productService.updateProduct(product);
-					String path = request.getServletContext().getRealPath("/") + "data_images/product/" + File.separator + part.getSubmittedFileName();
-					saveImage(part, path);
+//					String path = request.getServletContext().getRealPath("/") + "data_images/product/" + File.separator + part.getSubmittedFileName();
+//					saveImage(part, path);
 				}
 				message = new Message("Product updated successfully!!", "success", "alert-success");
 				session.setAttribute("message", message);

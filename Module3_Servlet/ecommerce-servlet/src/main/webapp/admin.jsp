@@ -60,7 +60,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="error_page.jsp">
+                <a href="display_orders.jsp">
                     <div class="card text-bg-light mb-3 text-center">
                         <div class="card-body">
                             <img src="images/order.png" style="max-width: 80px;"

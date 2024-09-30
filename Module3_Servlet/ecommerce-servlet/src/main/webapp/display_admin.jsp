@@ -103,7 +103,7 @@ label {
 
 <script>
 	// Attach the click event handler to the delete button
-	$(document).on('click', '#deleteadmin', function(e) {
+	$(document).on('click', '#deleteAdmin', function(e) {
 		e.preventDefault();
 		var url = $(this).attr('href');
 		swal({

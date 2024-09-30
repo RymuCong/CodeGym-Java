@@ -45,7 +45,7 @@ ProductServiceImpl ProductServiceImpl = new ProductServiceImpl(ConnectionProvide
 			<%
 			List<Product> productList = ProductServiceImpl.getAllProducts();
 			for (Product prod : productList) {
-				String category = catDao.getCategoryNameById(prod.getCategoryId());
+				String category = catService.getCategoryNameById(prod.getCategoryId());
 			%>
 			<tr class="text-center">
 				<td><img src="<%=prod.getProductImages()%>"

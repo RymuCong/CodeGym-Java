@@ -25,7 +25,7 @@ if (activeAdmin == null) {
 	<!-- update category -->
 	<%
 	int cid = Integer.parseInt(request.getParameter("cid"));
-	Category category = catDao.getCategoryById(cid);
+	Category category = catService.getCategoryById(cid);
 	%>
 	<div class="container mt-5">
 		<div class="row row-cols-1 row-cols-md-1 offset-md-2">
