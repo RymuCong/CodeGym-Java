@@ -1,8 +1,8 @@
 <%@page import="com.cg.casestudy.service.ProductServiceImpl"%>
-<%@page import="com.cg.casestudy.entity.Product"%>
 <%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.cg.casestudy.utils.PriceFormatter" %>
+<%@ page import="com.cg.casestudy.entity.*" %>
 <%@page errorPage="error_exception.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -10,6 +10,7 @@
 ProductServiceImpl productServiceImpl = new ProductServiceImpl(ConnectionProvider.getConnection());
 List<Product> productList = productServiceImpl.getAllLatestProducts();
 List<Product> topDeals = productServiceImpl.getDiscountedProducts();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -45,34 +46,29 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 <body>
 	<!--navbar -->
 	<%@include file="components/navbar.jsp"%>
+	<!-- end of navbar -->
 
 	<!-- Category list -->
-<%--	<div class="container-fluid px-3 py-3"--%>
-<%--		style="background-color: #e3f7fc;">--%>
-<%--		<div class="row">--%>
-<%--			<div class="card-group">--%>
-<%--				<%--%>
-<%--				for (Category c : categoryList) {--%>
-<%--				%>--%>
-<%--				<div class="col text-center">--%>
-<%--					<a href="products.jsp?category=<%=c.getCategoryId()%>"--%>
-<%--						style="text-decoration: none;">--%>
-<%--						<div class="card cus-card h-100">--%>
-<%--							<div class="container text-center">--%>
-<%--								<img src="Product_imgs\<%=c.getCategoryImage()%>" class="mt-3 "--%>
-<%--									style="max-width: 100%; max-height: 100px; width: auto; height: auto;">--%>
-<%--							</div>--%>
-<%--							<h6><%=c.getCategoryName()%></h6>--%>
-<%--						</div>--%>
-<%--					</a>--%>
-<%--				</div>--%>
-
-<%--				<%--%>
-<%--				}--%>
-<%--				%>--%>
-<%--			</div>--%>
-<%--		</div>--%>
-<%--	</div>--%>
+	<div class="container-fluid" style="background-color: #ff0055;">
+		<div class="row">
+			<div class="col-12">
+				<ul class="nav justify-content-center">
+					<%
+						for (Category c : categoryList) {
+					%>
+					<li class="nav-item">
+						<a class="nav-link" href="products.jsp?category=<%=c.getCategoryId()%>" style="color: white; text-align: center;">
+							<img src="<%=c.getCategoryImage()%>" style="width: 30px; height: 30px; margin-bottom: 5px;">
+							<%=c.getCategoryName()%>
+						</a>
+					</li>
+					<%
+						}
+					%>
+				</ul>
+			</div>
+		</div>
+	</div>
 <%--	<!-- end of list -->--%>
 
 	<!-- Carousel -->
@@ -121,7 +117,7 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 					<div class="card h-100">
 						<div class="container text-center">
 							<img
-								src="Product_imgs\<%=productList.get(i).getProductImages()%>"
+								src="<%=productList.get(i).getProductImages()%>"
 								class="card-img-top m-2"
 								style="max-width: 100%; max-height: 200px; width: auto;">
 						</div>
@@ -158,7 +154,7 @@ List<Product> topDeals = productServiceImpl.getDiscountedProducts();
 					style="text-decoration: none;">
 					<div class="card h-100">
 						<div class="container text-center">
-							<img src="Product_imgs\<%=topDeals.get(i).getProductImages()%>"
+							<img src="<%=topDeals.get(i).getProductImages()%>"
 								class="card-img-top m-2"
 								style="max-width: 100%; max-height: 200px; width: auto;">
 						</div>

@@ -1,11 +1,7 @@
-<%@page import="com.cg.casestudy.entity.Message"%>
-<%@page import="com.cg.casestudy.entity.OrderedProduct"%>
-<%@page import="com.cg.casestudy.entity.Order"%>
-<%@page import="java.util.List"%>
-<%@page import="com.cg.casestudy.service.OrderedProductServiceImpl"%>
-<%@page import="com.cg.casestudy.service.OrderServiceImpl"%>
-<%@page import="com.cg.casestudy.entity.User"%>
-<%@ page import="com.cg.casestudy.service.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.entity.*" %>
+<%@ page import="com.cg.casestudy.service.*" %>
+<%@ page import="com.cg.casestudy.utils.PriceFormatter" %>
 <%@page errorPage="error_exception.jsp"%>
 
 <%
@@ -16,18 +12,18 @@ if (u2 == null) {
 	response.sendRedirect("login.jsp");
 	return;  
 }
-OrderServiceImpl OrderServiceImpl = new OrderServiceImpl(ConnectionProvider.getConnection());
-OrderedProductServiceImpl ordProdDao = new OrderedProductServiceImpl(ConnectionProvider.getConnection());
+OrderServiceImpl orderService = new OrderServiceImpl(ConnectionProvider.getConnection());
+OrderedProductServiceImpl ordProdService = new OrderedProductServiceImpl(ConnectionProvider.getConnection());
 
-List<Order> orderList = OrderServiceImpl.getAllOrderByUserId(u2.getId());
+List<Order> orderList = orderService.getAllOrderByUserId(u2.getId());
 %>
 <div class="container-fluid px-3 py-3">
 	<%
-	if (orderList == null || orderList.size() == 0) {
+	if (orderList == null || orderList.isEmpty()) {
 	%>
 	<div class="container mt-5 mb-5 text-center">
 		<img src="images/empty-cart.png" style="max-width: 200px;"
-             class="img-fluid">
+			class="img-fluid">
 		<h4 class="mt-3">Zero Order found</h4>
 		Looks like you haven't placed any order!
 	</div>
@@ -50,18 +46,18 @@ List<Order> orderList = OrderServiceImpl.getAllOrderByUserId(u2.getId());
 			</tr>
 			<%
 			for (Order order : orderList) {
-				List<OrderedProduct> ordProdList = ordProdDao.getAllOrderedProduct(order.getId());
+				List<OrderedProduct> ordProdList = ordProdService.getAllOrderedProduct(order.getId());
 				for (OrderedProduct orderProduct : ordProdList) {
 			%>
 			<tr class="text-center">
-				<td><img src="Product_imgs\<%=orderProduct.getImage()%>"
+				<td><img src="<%=orderProduct.getImage()%>"
 					style="width: 40px; height: 40px; width: auto;"></td>
 				<td class="text-start"><%=order.getOrderId()%></td>
 				<td class="text-start"><%=orderProduct.getName()%></td>
 				<td><%=orderProduct.getQuantity()%></td>
-				<td><%=orderProduct.getPrice() * orderProduct.getQuantity()%></td>
+				<td><%=PriceFormatter.formatPrice(orderProduct.getPrice() * orderProduct.getQuantity())%></td>
 				<td><%=order.getDate()%></td>
-				<td><%=order.getPayementType()%></td>
+				<td><%=order.getPaymentType()%></td>
 				<td class="fw-semibold" style="color: green;"><%=order.getStatus()%></td>
 			</tr>
 			<%

@@ -7,7 +7,7 @@ Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 if (activeAdmin == null) {
 	Message message = new Message("You are not logged in! Login first!!", "error", "alert-danger");
 	session.setAttribute("message", message);
-	response.sendRedirect("adminlogin.jsp");
+	response.sendRedirect("login.jsp");
 	return;
 }
 %>
@@ -38,7 +38,7 @@ if (activeAdmin == null) {
 				for (Category c : categoryList) {
 				%>
 				<tr class="text-center">
-					<td><img src="data_images\category\<%=c.getCategoryImage()%>"
+					<td><img src="<%=c.getCategoryImage()%>"
 						style="width: 60px; height: 60px; width: auto;"></td>
 					<td><%=c.getCategoryName()%></td>
 					<td><a href="update_category.jsp?cid=<%=c.getCategoryId()%>" role="button" class="btn btn-secondary">Update</a>&emsp;

@@ -1,22 +1,21 @@
 package com.cg.casestudy.service;
 
-import com.cg.casestudy.DatabaseConnection;
 import com.cg.casestudy.entity.OrderedProduct;
+import com.cg.casestudy.utils.ConnectionProvider;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderedProductServiceImpl implements OrderedProductService {
+public class OrderedProductServiceImpl implements OrderedProductService{
+
     private static Connection con;
 
     static {
-        try {
-            DatabaseConnection dataBaseConnection = new DatabaseConnection();
-            con = dataBaseConnection.getConnection();
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }
+        con = ConnectionProvider.getConnection();
     }
 
     public OrderedProductServiceImpl() {
@@ -26,41 +25,46 @@ public class OrderedProductServiceImpl implements OrderedProductService {
         OrderedProductServiceImpl.con = con;
     }
 
-    // display all the necessary queries
-    private static final String INSERT_ORDERED_PRODUCT = "insert into ordered_product(name, quantity, price, image, orderid) values(?, ?, ?, ?, ?)";
-    private static final String GET_ALL_ORDERED_PRODUCT = "select * from ordered_product where orderid = ?";
+    // Display all necessary SQL queries
+    private static final String INSERT_ORDERED_PRODUCT = "insert into order_detail(name, quantity, price, image, orderId) values(?, ?, ?, ?, ?)";
+    private static final String GET_ALL_ORDERED_PRODUCT = "select * from order_detail where orderId = ?";
 
     @Override
-    public void insertOrderedProduct(OrderedProduct product) {
-        try (PreparedStatement statement = con.prepareStatement(INSERT_ORDERED_PRODUCT)) {
-            statement.setString(1, product.getName());
-            statement.setInt(2, product.getQuantity());
-            statement.setFloat(3, product.getPrice());
-            statement.setString(4, product.getImage());
-            statement.setInt(5, product.getOrderId());
-            statement.executeUpdate();
+    public void insertOrderedProduct(OrderedProduct ordProduct) {
+        System.out.println(ordProduct);
+        try {
+            PreparedStatement psmt = con.prepareStatement(INSERT_ORDERED_PRODUCT);
+            psmt.setString(1, ordProduct.getName());
+            psmt.setInt(2, ordProduct.getQuantity());
+            psmt.setFloat(3,ordProduct.getPrice());
+            psmt.setString(4, ordProduct.getImage());
+            psmt.setInt(5, ordProduct.getOrderId());
+
+            psmt.executeUpdate();
+
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
 
     @Override
-    public List<OrderedProduct> getAllOrderedProduct(int orderedId) {
-        List<OrderedProduct> list = new ArrayList<>();
-        try (PreparedStatement statement = con.prepareStatement(GET_ALL_ORDERED_PRODUCT)) {
-            statement.setInt(1, orderedId);
-            try (ResultSet rs = statement.executeQuery()) {
-                while (rs.next()) {
-                    OrderedProduct orderProd = new OrderedProduct();
-                    orderProd.setName(rs.getString("name"));
-                    orderProd.setQuantity(rs.getInt("quantity"));
-                    orderProd.setPrice(rs.getFloat("price"));
-                    orderProd.setImage(rs.getString("image"));
-                    orderProd.setOrderId(orderedId);
-                    list.add(orderProd);
-                }
+    public List<OrderedProduct> getAllOrderedProduct(int oid) {
+        List<OrderedProduct> list = new ArrayList<OrderedProduct>();
+        try {
+            PreparedStatement psmt = con.prepareStatement(GET_ALL_ORDERED_PRODUCT);
+            psmt.setInt(1, oid);
+            ResultSet rs = psmt.executeQuery();
+            while (rs.next()) {
+                OrderedProduct orderProd = new OrderedProduct();
+                orderProd.setName(rs.getString("name"));
+                orderProd.setQuantity(rs.getInt("quantity"));
+                orderProd.setPrice(rs.getInt("price"));
+                orderProd.setImage(rs.getString("image"));
+                orderProd.setOrderId(oid);
+
+                list.add(orderProd);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return list;

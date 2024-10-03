@@ -7,7 +7,7 @@ Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 if (activeAdmin == null) {
 	Message message = new Message("You are not logged in! Login first!!", "error", "alert-danger");
 	session.setAttribute("message", message);
-	response.sendRedirect("adminlogin.jsp");
+	response.sendRedirect("login.jsp");
 	return;
 }
 AdminServiceImpl AdminServiceImpl = new AdminServiceImpl();
@@ -88,7 +88,7 @@ label {
 								<td><%=a.getName() %></td>
 								<td><%=a.getEmail() %></td>
 								<td><%=a.getPhone() %></td>
-								<td><a href="AdminServlet?operation=delete&id=<%=a.getId()%>" role="button" class="btn btn-danger">Remove</a></td>
+								<td><a href="AdminServlet?operation=delete&id=<%=a.getId()%>" role="button" class="btn btn-danger" id="deleteAdmin">Remove</a></td>
 							</tr>
 							<%
 							}
@@ -100,4 +100,26 @@ label {
 		</div>
 	</div>
 </body>
+
+<script>
+	// Attach the click event handler to the delete button
+	$(document).on('click', '#deleteAdmin', function(e) {
+		e.preventDefault();
+		var url = $(this).attr('href');
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted you will not be able to recover this admin!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location.href = url;
+					} else {
+						swal("Your admin is safe!");
+					}
+				});
+	});
+</script>
 </html>

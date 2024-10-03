@@ -8,7 +8,7 @@
     if (activeAdmin == null) {
         Message message = new Message("You are not logged in! Login first!!", "error", "alert-danger");
         session.setAttribute("message", message);
-        response.sendRedirect("adminlogin.jsp");
+        response.sendRedirect("login.jsp");
         return;
     }
 %>
@@ -60,7 +60,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="error_page.jsp">
+                <a href="display_orders.jsp">
                     <div class="card text-bg-light mb-3 text-center">
                         <div class="card-body">
                             <img src="images/order.png" style="max-width: 80px;"

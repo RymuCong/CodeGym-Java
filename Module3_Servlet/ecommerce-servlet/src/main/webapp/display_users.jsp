@@ -9,7 +9,7 @@ Admin activeAdmin = (Admin) session.getAttribute("activeAdmin");
 if (activeAdmin == null) {
 	Message message = new Message("You are not logged in! Login first!!", "error", "alert-danger");
 	session.setAttribute("message", message);
-	response.sendRedirect("adminlogin.jsp");
+	response.sendRedirect("login.jsp");
 	return;
 }
 %>
@@ -47,7 +47,7 @@ if (activeAdmin == null) {
 				<td><%=u.getGender()%></td>
 				<td><%=UserServiceImpl.getAddress(u.getId())%></td>
 				<td><%=u.getDateTime()%></td>
-				<td><a href="UpdateUserServlet?operation=deleteUser&uid=<%=u.getId()%>" role="button" class="btn btn-danger">Remove</a></td>
+				<td><a href="UpdateUserServlet?operation=deleteUser&uid=<%=u.getId()%>" role="button" class="btn btn-danger" id="deleteUser">Remove</a></td>
 			</tr>
 			<%
 			}
@@ -55,4 +55,26 @@ if (activeAdmin == null) {
 		</table>
 	</div>
 </body>
+
+<script>
+	// Attach the click event handler to the delete button
+	$(document).on('click', '#deleteUser', function(e) {
+		e.preventDefault();
+		var url = $(this).attr('href');
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted you will not be able to recover this user!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+			.then((willDelete) => {
+				if (willDelete) {
+					window.location.href = url;
+				} else {
+					swal("Your user is safe!");
+				}
+			});
+	});
+</script>
 </html>

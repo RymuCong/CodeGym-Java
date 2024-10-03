@@ -30,5 +30,7 @@ public interface UserService {
 
     String getPhone(int userId);
 
+    String getName(int userId);
+
     List<String> getAllUserEmails();
 }

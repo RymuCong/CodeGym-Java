@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderedProductService {
 
-    void insertOrderedProduct(OrderedProduct product);
+    void insertOrderedProduct(OrderedProduct ordProduct);
 
-    List<OrderedProduct> getAllOrderedProduct(int orderedId);
+    List<OrderedProduct> getAllOrderedProduct(int oid);
 }

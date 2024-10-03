@@ -1,6 +1,7 @@
 package com.cg.casestudy.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Order {
 	
@@ -8,35 +9,37 @@ public class Order {
 	private String orderId;
 	private String status;
 	private Timestamp date;
-	private String payementType;
+	private String paymentType;
 	private int userId;
+	private List<Cart> cartProducts;
 	
 	public Order() {
 	}
 
-	public Order(String orderId, String status, Timestamp date, String payementType, int userId) {
+	public Order(String orderId, String status, Timestamp date, String paymentType, int userId, List<Cart> cartProducts) {
 		super();
 		this.orderId = orderId;
 		this.status = status;
 		this.date = date;
-		this.payementType = payementType;
+		this.paymentType = paymentType;
 		this.userId = userId;
+		this.cartProducts = cartProducts;
 	}
 
-	public Order(String orderId, String status, String payementType, int userId) {
+	public Order(String orderId, String status, String paymentType, int userId) {
 		super();
 		this.orderId = orderId;
 		this.status = status;
-		this.payementType = payementType;
+		this.paymentType = paymentType;
 		this.userId = userId;
 	}
 
 	public int getUserId() {
-		return id;
+		return userId;
 	}
 
-	public void setUserId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getOrderId() {
@@ -63,21 +66,27 @@ public class Order {
 		this.date = date;
 	}
 
-	public String getPayementType() {
-		return payementType;
-	}
-
-	public void setPayementType(String payementType) {
-		this.payementType = payementType;
-	}
-
 	public int getId() {
-		return userId;
+		return id;
 	}
 
-	public void setId(int userId) {
-		this.userId = userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+
+	public List<Cart> getCartProducts() {
+		return cartProducts;
+	}
+
+	public void setCartProducts(List<Cart> cartProducts) {
+		this.cartProducts = cartProducts;
+	}
 }

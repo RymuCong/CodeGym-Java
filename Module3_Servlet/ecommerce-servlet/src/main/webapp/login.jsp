@@ -35,12 +35,12 @@ label{
 							<input type="hidden" name="login" value="user"> 
 							<div class="mb-3">
 								<label class="form-label">Email</label> <input
-									type="email" name="user_email" placeholder="Email address"
+									type="email" name="email" placeholder="Email address"
 									class="form-control" required>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Password</label>
-								<input type="password" name="user_password"
+								<input type="password" name="password"
 									placeholder="Enter your password" class="form-control" required>
 							</div>
 							<div id="login-btn" class="container text-center">

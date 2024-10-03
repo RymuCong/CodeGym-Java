@@ -34,7 +34,7 @@ if (searchKey != null) {
 if (prodList != null && prodList.size() == 0) {
 
 	message = "No items are available for \""
-	+ (searchKey != null ? searchKey : CategoryServiceImpl.getCategoryById(Integer.parseInt(catId.trim()))) + "\"";
+	+ (searchKey != null ? searchKey : CategoryServiceImpl.getCategoryNameById(Integer.parseInt(catId.trim()))) + "\"";
 
 	prodList = ProductServiceImpl.getAllProducts();
 }
@@ -92,13 +92,13 @@ if (prodList != null && prodList.size() == 0) {
 
 				<div class="card h-100 px-2 py-2">
 					<div class="container text-center">
-						<img src="Product_imgs\<%=p.getProductImages()%>"
+						<img src="<%=p.getProductImages()%>"
 							class="card-img-top m-2"
 							style="max-width: 100%; max-height: 200px; width: auto;">
 <%--						<div class="wishlist-icon">--%>
 <%--							<%--%>
 <%--							if (u != null) {--%>
-<%--//								if (wishlistDao.getWishlist(u.getId(), p.getProductId())) {--%>
+<%--//								if (wishlistService.getWishlist(u.getId(), p.getProductId())) {--%>
 <%--							%>--%>
 <%--							<button--%>
 <%--								onclick="window.open('WishlistServlet?uid=<%=u.getId()%>&pid=<%=p.getProductId()%>&op=remove', '_self')"--%>

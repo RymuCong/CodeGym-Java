@@ -4,12 +4,13 @@
 <%@page import="com.cg.casestudy.entity.Category"%>
 <%@ page import="com.cg.casestudy.service.CategoryServiceImpl" %>
 <%@ page import="com.cg.casestudy.utils.ConnectionProvider" %>
+<%@ page import="com.cg.casestudy.service.CartServiceImpl" %>
 <%
 	User user = (User) session.getAttribute("activeUser");
 	Admin admin = (Admin) session.getAttribute("activeAdmin");
 
-	CategoryServiceImpl catDao = new CategoryServiceImpl(ConnectionProvider.getConnection());
-	List<Category> categoryList = catDao.getAllCategories();
+	CategoryServiceImpl catService = new CategoryServiceImpl(ConnectionProvider.getConnection());
+	List<Category> categoryList = catService.getAllCategories();
 %>
 <style>
 	.navbar {
@@ -145,7 +146,7 @@
 									</div>
 									<div class="mb-2">
 										<label class="form-label"><b>Product Image</b></label> <input
-											type="file" name="photo" class="form-control" required>
+											type="file" name="product_img" class="form-control" id="product_img" required>
 									</div>
 								</div>
 								<div class="modal-footer" style="color: #f2f2f2">
@@ -202,35 +203,46 @@
 				</div>
 				<!-- end of modal -->
 				<%
-				} else if (user != null) {
+				} else {
+                if (user != null) {
+					CartServiceImpl cartService = new CartServiceImpl(ConnectionProvider.getConnection());
+					int cartCount = cartService.getCartCountByUserId(user.getId());
 				%>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="profile.jsp"><%=user.getName()%></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="LogoutServlet?user=user">
-						<i class="fa-solid fa-user-slash" style="color: #fafafa;"></i>&nbsp;Logout
-					</a>
-				</li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="profile.jsp"><%=user.getName()%></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="LogoutServlet?user=user">
+                        <i class="fa-solid fa-user-slash" style="color: #fafafa;"></i>&nbsp;Logout
+                    </a>
+                </li>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link" aria-current="page" href="cart.jsp">--%>
+<%--                        <i class="fa-solid fa-shopping-cart" style="color: #ffffff;"></i>&nbsp;Cart--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+				<li class="nav-item active pe-3"><a
+						class="nav-link position-relative" aria-current="page"
+						href="cart.jsp"><i class="fa-solid fa-cart-shopping"
+										   style="color: #ffffff;"></i> &nbsp;Cart<span
+						class="position-absolute top-1 start-0 translate-middle badge rounded-pill bg-danger"><%=cartCount%></span></a></li>
+
 				<%
 				} else {
 				%>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="register.jsp">
-						<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>&nbsp;Register
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="login.jsp">
-						<i class="fa-solid fa-user-lock" style="color: #fafafa;"></i>&nbsp;Login
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="adminlogin.jsp">&nbsp;Admin</a>
-				</li>
-
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="register.jsp">
+                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>&nbsp;Register
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="login.jsp">
+                        <i class="fa-solid fa-user-lock" style="color: #fafafa;"></i>&nbsp;Login
+                    </a>
+                </li>
 				<%
-					}
+                }
+                }
 				%>
 			</ul>
 		</div>
