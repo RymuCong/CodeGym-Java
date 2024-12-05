@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+</head>
+<body>
+
+<div th:fragment="ProductAdd">
+    <div class = "alert-danger" id="message"></div>
+
+    <script>
+        $(function () {
+            $("#btnSave").click(function () {
+                var form = document.getElementById("addForm");
+                let productName = $('#productName').val();
+                let price = $('#price').val();
+
+                // Kiểm tra tất cả các ô không được để trống
+                if (productName === '' || price === '') {
+                    $("#message").text("Tất cả các ô không được để trống.");
+                    $("#message").show();
+                    return false;
+                }
+
+                // Kiểm tra tên sản phẩm từ 5 đến 50 ký tự
+                if (productName.length < 5 || productName.length > 50) {
+                    $("#message").text("Tên sản phẩm phải từ 5 đến 50 ký tự.");
+                    $("#message").show();
+                    return false;
+                }
+
+                // Kiểm tra giá bắt đầu phải là số và thấp nhất là 100.000 VND
+                if (isNaN(price) || parseInt(price) < 100000) {
+                    $("#message").text("Giá bắt đầu phải là số và thấp nhất phải là 100.000 VND.");
+                    $("#message").show();
+                    return false;
+                }
+
+                // Nếu tất cả điều kiện thỏa mãn, gửi form
+                form.submit();
+            });
+        });
+    </script>
+
+    <div class="container">
+        <hr>
+
+        <p class = "h4 mb-4">Thêm sản phẩm</p>
+
+        <form action="#" th:action="@{/product/save}" th:object="${product}" method="post" id="addForm" enctype="multipart/form-data">
+
+            <input type="hidden" th:field="*{id}">
+
+            <input type="text" id="productName" th:field="*{productName}" class="form-control mb-4 w-25" placeholder="Tên sản phẩm"/>
+
+            <input type="number" th:field="*{price}" class="form-control mb-4 w-25" placeholder="Giá bán"/>
+
+            <input type="text" th:field="*{status}" class="form-control mb-4 w-25" placeholder="Trạng thái"/>
+
+            <select th:field="*{category}" class="form-control mb-4 w-25">
+                <option value="">Chọn nhãn hàng</option>
+                <option th:each="tempCategory : ${categories}" th:value="${tempCategory.id}" th:text="${tempCategory.categoryName}"></option>
+            </select>
+
+            <button type="button" id="btnSave" class="btn btn-info col-2">Save</button>
+        </form>
+
+        <hr>
+        <a th:href="@{/product}">Quay về trang sản phẩm</a>
+    </div>
+
+</div>
+</body>
+</html>
