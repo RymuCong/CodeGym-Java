@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
         return flag;
     }
 
+    // no SQL Injection vulnerability
     @Override
     public User getByEmailPassword(String userEmail, String userPassword) {
         User user = null;
@@ -79,6 +80,29 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    // SQL Injection vulnerability password = ' OR 1 = 1 --
+//    @Override
+//    public User getByEmailPassword(String email, String password) {
+//        User user = null;
+//        String query = "SELECT * FROM user WHERE email = '" + email + "' AND password = '" + password + "'";
+//
+//        try (Statement statement = con.createStatement();
+//             ResultSet rs = statement.executeQuery(query)) {
+//            if (rs.next()) {
+//                user = new User();
+//                user.setName(rs.getString("name"));
+//                user.setEmail(rs.getString("email"));
+//                user.setPassword(rs.getString("password"));
+//                user.setPhone(rs.getString("phone"));
+//                user.setGender(rs.getString("gender"));
+//                user.setAddress(rs.getString("address"));
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return user;
+//    }
 
     @Override
     public User getById(int userId) {

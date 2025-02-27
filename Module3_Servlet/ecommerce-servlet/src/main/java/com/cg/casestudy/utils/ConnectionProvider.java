@@ -9,8 +9,7 @@ public class ConnectionProvider {
             Connection con = null;
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-//                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/e-commerce-servlet", "root", "root");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:4040/e-commerce-servlet", "root", "root");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/e-commerce-servlet", "root", "root");
             } catch (Exception e) {
                 System.err.println("Connection Error: " + e);
             }
